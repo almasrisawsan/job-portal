@@ -1,4 +1,4 @@
-# React useEffect Workshop Documentation: Jobs Portal
+# React Workshop Documentation: Jobs Portal
 
 ## I. Workshop Overview
 
