@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import icon from "../welcome/icon.png";
 import Loading from "./Loading";
+import { useNavigate } from "react-router";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -32,8 +34,9 @@ export default function Categories() {
         <div className=" mx-auto grid grid-cols-2 sm:grid-cols-3 container md:grid-cols-4 lg:grid-cols-5 gap-6 ">
           {categories.map((cat) => (
             <div
+              onClick={() => navigate(`/jobsbycatogries/${cat.id}`)}
               key={cat.id}
-              className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center justify-center"
+              className="bg-white p-6 rounded-xl shadow cursor-pointer hover:shadow-lg transition flex flex-col items-center justify-center"
             >
               <div className="bg-primary/35 p-4 rounded-full mb-4">
                 <img src={icon} />

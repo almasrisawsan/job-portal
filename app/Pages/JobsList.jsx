@@ -1,69 +1,55 @@
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading"; // تأكد أنه موجود أو أضف div بسيط بدلًا منه
 
 export default function JobsList() {
-  // Sample jobs data
-  const jobs = [
-    {
-      id: 1,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 2,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 3,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 4,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 5,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 6,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 7,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-  ];
+  const { id } = useParams(); // ✅ أخذ categoryId من الرابط
+  const navigate = useNavigate();
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs")
+      .then((res) => {
+        // ✅ فلترة الوظائف حسب categoryId
+        const filtered = res.data.filter(
+          (job) => String(job.categoryId) === String(id)
+        );
+        setJobs(filtered);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching jobs:", err);
+        setLoading(false);
+      });
+  }, [id]);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-
-      <main className="flex-1 bg-gray-50 py-8">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">My Jobs List</h2>
-
-          <div className="bg-white rounded-lg shadow overflow-hidden">
+    <div className="container mx-auto">
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="text-3xl font-bold">Jobs in Category #{id}</h2>
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 transition"
+        >
+          ← Back
+        </button>
+      </div>
+      <div className="py-10">
+        {loading ? (
+          <div className="flex justify-center ">
+            <Loading />
+          </div>
+        ) : jobs.length === 0 ? (
+          <p className="text-center text-gray-500">
+            No jobs found in this category.
+          </p>
+        ) : (
+          <div className="bg-white rounded-lg shadow overflow-auto">
             <table className="w-full">
               <thead className="bg-gray-50 border-b">
                 <tr>
@@ -71,13 +57,13 @@ export default function JobsList() {
                     Title
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                    Job Type
+                    Type
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                    Posted Date
+                    Salary
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                    Application Deadline
+                    Location
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
                     Action
@@ -91,19 +77,20 @@ export default function JobsList() {
                       {job.title}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {job.jobType}
+                      {job.type}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {job.postedDate}
+                      {job.salary}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {job.deadline}
+                      {job.location}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex gap-3">
-                        {/* View Icon */}
+                        {/* View */}
                         <button
-                          className="text-primary hover:text-primary/80"
+                          onClick={() => navigate(`/jobs/${job.id}`)}
+                          className="text-blue-600 hover:text-blue-800"
                           title="View"
                         >
                           <svg
@@ -127,9 +114,9 @@ export default function JobsList() {
                           </svg>
                         </button>
 
-                        {/* Edit Icon */}
+                        {/* Edit */}
                         <button
-                          className="text-edit hover:text-edit/80"
+                          className="text-yellow-600 hover:text-yellow-800"
                           title="Edit"
                         >
                           <svg
@@ -148,9 +135,9 @@ export default function JobsList() {
                           </svg>
                         </button>
 
-                        {/* Delete Icon */}
+                        {/* Delete */}
                         <button
-                          className="text-delete hover:text-delete/80"
+                          className="text-red-600 hover:text-red-800"
                           title="Delete"
                         >
                           <svg
@@ -175,10 +162,8 @@ export default function JobsList() {
               </tbody>
             </table>
           </div>
-        </div>
-      </main>
-
-      <Footer />
+        )}
+      </div>
     </div>
   );
 }
