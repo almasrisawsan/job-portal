@@ -1,5 +1,4 @@
-import React from 'react';
-import './Footer.css'; // for background color
+import './Footer.css';
 
 function Footer() {
   return (

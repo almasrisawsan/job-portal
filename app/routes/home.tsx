@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
-import Header from "~/_components/Header";
-import Footer from "~/_components/Footer";
+import Header from "~/_components/header/Header";
+import Footer from "~/_components/footer/Footer";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Jobs Portal" },

@@ -9,8 +9,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import Header from "./_components/Header";
-import Footer from "./_components/Footer";
+import Header from "./_components/header/Header";
+import Footer from "./_components/footer/Footer";
 
 
 export const links: Route.LinksFunction = () => [
