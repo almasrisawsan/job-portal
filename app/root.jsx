@@ -20,6 +20,7 @@ export function Layout({ children }) {
       </head>
       <body>
         {children}
+        <h1>Mohjamed</h1>
         <ScrollRestoration />
         <Scripts />
       </body>
