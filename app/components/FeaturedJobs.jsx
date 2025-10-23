@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { MapPin, Clock, DollarSign } from "lucide-react";
-import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { GetJobs } from "../api/api";
@@ -17,11 +15,12 @@ export default function FeaturedJobs() {
         const response = await GetJobs();
         setJobs(response.data);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching jobs:", error);
       } finally {
         setLoading(false);
       }
     };
+    fetchJobs();
   }, []);
 
   return (
@@ -29,7 +28,34 @@ export default function FeaturedJobs() {
       <h2 className="text-center text-xl font-semibold mb-8">Featured Jobs</h2>
 
       {loading ? (
-        <Loading />
+        // 🔹 Skeleton loader
+        <div className="container mx-auto flex flex-col gap-5 px-4">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-lg p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between animate-pulse"
+            >
+              <div className="flex items-center gap-4">
+                {/* Company logo skeleton */}
+                <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+
+                {/* Text section skeleton */}
+                <div className="flex flex-col gap-2">
+                  <div className="h-4 bg-gray-300 rounded w-40"></div>
+                  <div className="h-3 bg-gray-200 rounded w-24"></div>
+                  <div className="flex gap-3 mt-2">
+                    <div className="h-3 bg-gray-200 rounded w-16"></div>
+                    <div className="h-3 bg-gray-200 rounded w-12"></div>
+                    <div className="h-3 bg-gray-200 rounded w-20"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Button skeleton */}
+              <div className="mt-4 sm:mt-0 h-8 w-28 bg-gray-300 rounded"></div>
+            </div>
+          ))}
+        </div>
       ) : (
         <div className="container mx-auto flex flex-col gap-5 px-4">
           {jobs.map((job) => (

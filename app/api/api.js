@@ -9,3 +9,16 @@ export function GetCatogries() {
 export function GetJobs() {
   return axios.get(`${baseurl}/jobs`);
 }
+
+export function GetJobsByid(id) {
+  return axios.get(`${baseurl}/jobs/${id}`);
+}
+
+export async function GetJobsByCatogriesId(id) {
+  const resposive = await axios.get(`${baseurl}/jobs`);
+  return resposive.data.filter((job) => String(job.categoryId) === String(id));
+}
+
+export function DeleteJobsByid(id) {
+  return axios.delete(`${baseurl}/jobs/${id}`);
+}
