@@ -1,32 +1,42 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { DeleteJobsByid, GetJobsByCatogriesId } from "../api/api";
 
 export default function JobsList() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJobs = async () => {
-      setLoading(true);
-      setError(null);
-
       try {
-        const response = await axios.get('https://68f8f8e8deff18f212b83fba.mockapi.io/jobs');
-        setJobs(response.data);
-      } catch (err) {
-        setError(err.message);
-        console.error('Error fetching jobs:', err);
+        const response = await GetJobsByCatogriesId(id);
+        setJobs(response);
+      } catch {
       } finally {
         setLoading(false);
       }
     };
-
     fetchJobs();
-  }, []);
+  }, [id]);
 
+  const DeleteJob = async (jobid) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      console.log(jobid);
+      await DeleteJobsByid(jobid);
+      alert("Job deleted successfully!");
+      setJobs((prev) => prev.filter((job) => job.id !== jobid));
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      alert("Failed to delete job. Please try again.");
+    }
+  };
   return (
     <div className="container mx-auto py-10">
       <div className="flex justify-between items-center mb-8">
