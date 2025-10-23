@@ -1,6 +1,8 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
-
+import Navbar from "../components//Navbar";
+import Hero from "../components//Hero";
+import Categories from "../components//Categories";
+import Jobs from "../components//Jobs";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -9,5 +11,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <Categories />
+      <Jobs />
+    </>
+  );
 }
