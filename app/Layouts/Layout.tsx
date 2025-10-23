@@ -1,6 +1,6 @@
 import React from "react";
-import Footer from "~/components/Footer";
-import Header from "~/components/Header";
+import Footer from "~/Layouts/Footer";
+import Header from "~/Layouts/Header";
 
 
 const Layout = ({ children }:any) => (

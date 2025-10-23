@@ -1,7 +1,7 @@
 import JobTable from "~/components/JobTable/JobTable";
 import type { Route } from "./+types/JobListPage";
 import { useEffect, useState } from "react";
-import Button from "~/components/Button";
+import Button from "~/Layouts/Button";
 import Layout from "~/Layouts/Layout";
 
 export function meta({}: Route.MetaArgs) {
@@ -12,10 +12,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function JobListPage() {
-
-
-  
-
   return (
     <Layout>
       <div className="flex justify-center items-center mb-6 text-center">
