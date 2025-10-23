@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import JobTableHeader from "./JobTableHeader";
 import JobTableRow from "./JobTableRow";
 // import { d } from "node_modules/@react-router/dev/dist/routes-CZR-bKRt";
-const Base_URL = "https://68f8f8e8deff18f212b83fba.mockapi.io/jobs"
+const Base_URL = "https://68f8f8e8deff18f212b83fba.mockapi.io/jobs";
 // Mock data
 const jobs = [
   {
@@ -27,30 +27,27 @@ const JobTable = ({ onView, onEdit, onDelete }: any) => {
   useEffect(() => {
     fetch(Base_URL)
       .then((res) => res.json())
-      .then((data) => 
-        setJobs(data)
-        );
+      .then((data) => setJobs(data));
   }, []);
 
   return (
-    <div className="overflow-x-auto rounded-xl">
-      <table className="min-w-full bg-white border  border-gray-200  shadow-sm">
-        <JobTableHeader />
-        <tbody>
-          {jobs.length > 0 ? (
-            jobs.map((job :any) => (
-              <JobTableRow
-                key={job.id}
-                job={job}
-              />
-            ))
-          ) : (
-            <tr>
-              <td className="text-center py-4 text-gray-500">No jobs found</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className="overflow-x-auto rounded-3xl p-6">
+      <div className="overflow-x-auto rounded-2xl border border-gray-200">
+        <table className="min-w-full bg-white border-collapse border border-gray-200">
+          <JobTableHeader />
+          <tbody>
+            {jobs.length > 0 ? (
+              jobs.map((job: any) => <JobTableRow key={job.id} job={job} />)
+            ) : (
+              <tr>
+                <td className="text-center py-4 text-gray-500" colSpan={5}>
+                  No jobs found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -14,7 +14,7 @@ export function meta({}: Route.MetaArgs) {
 export default function JobListPage() {
   return (
     <Layout>
-      <div className="flex justify-center items-center mb-6 text-center">
+      <div className="flex justify-center items-center mb-6 text-center h-[109px] bg-[#F4F5F7]">
         <h2 className="text-[30px] font-semibold  text-gray-800">My Jobs List</h2>
       </div>
       <JobTable  />
