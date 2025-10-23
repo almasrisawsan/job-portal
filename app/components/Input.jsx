@@ -8,13 +8,13 @@ function Input({
   icon: Icon,
   iconsize,
   iconPosition = "left",
-  inputstyle = "border", 
+  inputstyle = "border",
   className,
   iconClassName,
   name,
 }) {
   const border = `border border-gray-300 rounded  px-4`;
-  const bg = `bg-bg-gray rounded  px-4`;
+  const bg = `bg-white rounded  px-4`;
   const borderBottom = `border-b border-gray-300 rounded-none`;
 
   const getInputStyle = () => {
@@ -45,7 +45,7 @@ function Input({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={`${getInputStyle()} ${className} focus:outline-none focus:border-primary focus:ring-0 w-full py-2 transition ${
+          className={`${getInputStyle()} ${className} focus:outline-none md:px-10 md:py-3 py-2 px-5 text-base  rounded-md focus:border-primary focus:ring-0 w-full  text-[#AEB0B4] transition ${
             Icon ? (iconPosition === "left" ? "pl-10" : "pr-10") : ""
           }`}
         />
