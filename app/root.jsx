@@ -18,7 +18,7 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -28,7 +28,11 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 }
 
 export function ErrorBoundary({ error }) {
