@@ -9,9 +9,7 @@ interface IProps {
 };
 
 const Hero = ({
-  bgSrc = "/assets/landing.png",
-  mobileBgPosition = "bg-right",
-  desktopBgPosition = "md:bg-right",
+  bgSrc = "/landing.png",
   containOnMobile = false,
 }: IProps) => {
   
@@ -22,14 +20,12 @@ const Hero = ({
       aria-label="Job Portal Hero"
       className={[
         "relative w-full h-screen overflow-hidden isolate",
-        `bg-[url('${bgSrc}')]`,
         "bg-no-repeat",
-        mobileBgPosition,
-        desktopBgPosition,
-        bgSizeClass,
+        "bg-right",
+        containOnMobile ? "bg-contain md:bg-cover" : "bg-cover",
       ].join(" ")}
+      style={{ backgroundImage: `url(${bgSrc})` }}   // ✅ dynamic, works
     >
-    
       <div
         className="
           absolute inset-0 z-0
@@ -38,7 +34,6 @@ const Hero = ({
         "
         aria-hidden="true"
       />
-
       <div className="relative z-10 h-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="h-full flex items-center">
           <div className="max-w-2xl">
