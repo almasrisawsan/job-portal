@@ -16,7 +16,7 @@ const Navbar = ({ showDashboard = true }) => {
       <div className="flex items-center gap-4">
         {showDashboard && (
           <button
-            onClick={() => navigate("/das")}
+            onClick={() => navigate("/dashboard")}
             // onClick={() => navigate("/dashboard")}
             className="text-sm text-[#338573] hover:text-[#52998a]"
           >
@@ -25,7 +25,7 @@ const Navbar = ({ showDashboard = true }) => {
         )}
 
         <button
-          onClick={() => navigate("/post-job")}
+          onClick={() => navigate("/create-job")}
           className="px-4 py-2 bg-[#338573] text-white rounded hover:bg-[#52998a]"
         >
           Post a job
