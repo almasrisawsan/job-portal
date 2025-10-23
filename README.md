@@ -70,7 +70,7 @@ The team must implement the following features, demonstrating correct usage of t
 | **1. Initial Job Fetch** | `JobListPage.jsx` | Fetch the list of all jobs when the component first mounts. | `[]` (Empty Array) |
 | **2. Category Filter Fetch** | `FilterSidebar.jsx` | Fetch the list of categories when the component mounts. | `[]` (Empty Array) |
 | **3. Job Search/Filter** | `JobListPage.jsx` | **A single function** that re-fetches jobs when the search term OR the selected category changes. | `[searchTerm, selectedCategoryId]` |
-| **4. Featured Jobs View**| `JobListPage.jsx` | The function must append the query `?isFeatured=true` to the API call when the "Featured" state is toggled. | `[isFeaturedToggleState]` |
+| **4. Featured Jobs View**| `JobListPage.jsx` | List of jobs must be filtered by `isFeatured=true` |
 | **5. Job Detail Fetch** | `JobDetailPage.jsx` | Fetch a single job's data based on the ID retrieved from the URL route parameters. | `[jobIdFromRoute]` |
 | **6. Cleanup (Optional/Bonus)** | `JobListPage.jsx` | Implement a **cleanup function** inside `useEffect` to **debounce** the search input field, preventing excessive API calls while the user types. | `[searchTerm]` |
 
