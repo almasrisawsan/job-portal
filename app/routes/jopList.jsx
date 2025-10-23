@@ -7,23 +7,23 @@ const JopList = () => {
         My Job List
       </div>
       <div className="px-20">
-        <table className="table-auto border-collapse border border-gray-300 w-full">
+        <table className="table-auto border border-gray-300 w-full border-collapse">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-4 py-2">Title</th>
-              <th className="border px-4 py-2">Job Type</th>
-              <th className="border px-4 py-2">Posted Date</th>
-              <th className="border px-4 py-2">Application Deadline</th>
-              <th className="border px-4 py-2">Action</th>
+            <tr className="bg-gray-200 border-b border-gray-300">
+              <th className="px-4 py-2 text-left">Title</th>
+              <th className="px-4 py-2 text-left">Job Type</th>
+              <th className="px-4 py-2 text-left">Posted Date</th>
+              <th className="px-4 py-2 text-left">Application Deadline</th>
+              <th className="px-4 py-2 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="text-center">
-              <td className="border px-4 py-2">test</td>
-              <td className="border px-4 py-2">test</td>
-              <td className="border px-4 py-2">20/20/2000</td>
-              <td className="border px-4 py-2">30/3/2000</td>
-              <td className="border px-4 py-2 flex justify-center gap-2">
+            <tr className="text-center border-b border-gray-300">
+              <td className="px-4 py-2">test</td>
+              <td className="px-4 py-2">test</td>
+              <td className="px-4 py-2">20/20/2000</td>
+              <td className="px-4 py-2">30/3/2000</td>
+              <td className="px-4 py-2 flex justify-center gap-2">
                 <button className="text-blue-500 hover:text-blue-700">
                   <FaEye />
                 </button>
@@ -35,12 +35,12 @@ const JopList = () => {
                 </button>
               </td>
             </tr>
-            <tr className="text-center">
-              <td className="border px-4 py-2">test</td>
-              <td className="border px-4 py-2">test</td>
-              <td className="border px-4 py-2">20/20/2000</td>
-              <td className="border px-4 py-2">30/3/2000</td>
-              <td className="border px-4 py-2 flex justify-center gap-2">
+            <tr className="text-center border-b border-gray-300">
+              <td className="px-4 py-2">test</td>
+              <td className="px-4 py-2">test</td>
+              <td className="px-4 py-2">20/20/2000</td>
+              <td className="px-4 py-2">30/3/2000</td>
+              <td className="px-4 py-2 flex justify-center gap-2">
                 <button className="text-blue-500 hover:text-blue-700">
                   <FaEye />
                 </button>
@@ -58,4 +58,5 @@ const JopList = () => {
     </div>
   );
 };
+
 export default JopList;
