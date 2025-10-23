@@ -1,59 +1,31 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function JobsList() {
-  // Sample jobs data
-  const jobs = [
-    {
-      id: 1,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 2,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 3,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 4,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 5,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 6,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-    {
-      id: 7,
-      title: "Laravel Developer",
-      jobType: "Full Time",
-      postedDate: "12/06/2022",
-      deadline: "Full Time",
-    },
-  ];
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await axios.get('https://68f8f8e8deff18f212b83fba.mockapi.io/jobs');
+        setJobs(response.data);
+      } catch (err) {
+        setError(err.message);
+        console.error('Error fetching jobs:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
