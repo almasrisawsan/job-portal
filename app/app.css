@@ -6,15 +6,22 @@
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --color-primary: #338573;
   --color-secondary: #eff6f2;
+  --color-secondary-light: #F6F7FA;
   --color-secondary-dark: #bdd8d2;
   --color-light: #F4F5F7;
 }
 
+.container-box {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  /* @apply bg-white dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
-  }
+  } */
 }

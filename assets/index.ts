@@ -1,3 +1,4 @@
-import ImageHeroBanner from './ImageHeroBanner.svg';
+import ImageHeroBanner from './ImageHeroBanner.png';
+import ImageCodesandbox from './ImageCodesandbox.svg';
 
-export { ImageHeroBanner };
+export { ImageHeroBanner, ImageCodesandbox };
