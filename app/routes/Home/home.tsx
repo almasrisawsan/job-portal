@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import HeroSection from "./components/HeroSection";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <h1>Job Portal</h1>;
+  return (
+    <div>
+      <HeroSection />
+    </div>
+  );
 }
