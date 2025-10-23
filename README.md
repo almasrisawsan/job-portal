@@ -2,11 +2,11 @@
 
 ## I. Workshop Overview
 
-*   **Goal:** Implement a fully functional Jobs Portal using React Hooks (`useState`, `useEffect`) and a hosted REST API. The core focus is on correctly handling side effects, asynchronous operations (data fetching), and dependency arrays in `useEffect`.
-*   **Duration:** 4–6 hours (split over two sessions recommended).
+*   **Goal:** Implement a fully functional Jobs Portal using React and hosted REST API. The core focus is on correctly handling side effects, asynchronous operations (data fetching), and dependency arrays.
+*   **Duration:** 4–6 hours.
 *   **Deliverable:** A single-page application (SPA) that can list, filter, view, create, and delete job listings.
 
-### Group Roles (3 Students per Group)
+### Group Roles (3-4 Students per Group)
 
 | Role | Primary Focus | Key Skills Applied |
 | :--- | :--- | :--- |
@@ -31,7 +31,7 @@
 | Resource | Endpoint | Purpose |
 | :--- | :--- | :--- |
 | **Jobs** | `/jobs` | All CRUD operations (List, Detail, Create, Update, Delete). **Primary workshop focus.** |
-| **Categories** | `/categories` | Read-only list for the filtering sidebar. |
+| **Categories** | `/categories` | Read-only list for the filtering and creating jobs. |
 
 ### C. Design Reference
 
@@ -45,10 +45,9 @@ The application UI must align with the provided Figma design:
 
 ### A. Jobs Resource (`/jobs`)
 
-| Operation | Method | Endpoint | `useEffect` Use Case |
+| Operation | Method | Endpoint |
 | :--- | :--- | :--- | :--- |
 | **List All** | `GET` | `/jobs` | Initial data load, search, and filtering. |
-| **List/Filter**| `GET` | `/jobs?search=term&category=id&isFeatured=true` | **CRITICAL: Filtering based on user interaction.** |
 | **Get Detail** | `GET` | `/jobs/:id` | Fetching data for the Job Detail Page. |
 | **Create** | `POST` | `/jobs` | Submitting a new job (form submission handler). |
 | **Update** | `PUT` | `/jobs/:id` | Saving changes to an existing job (form submission handler). |
@@ -56,17 +55,17 @@ The application UI must align with the provided Figma design:
 
 ### B. Categories Resource (`/categories`)
 
-| Operation | Method | Endpoint | `useEffect` Use Case |
+| Operation | Method | Endpoint  |
 | :--- | :--- | :--- | :--- |
 | **List All** | `GET` | `/categories` | Populating the filter sidebar/dropdown menu. |
 
 ---
 
-## IV. Project Requirements: `useEffect` Implementation
+## IV. Project Requirements :
 
-The team must implement the following features, demonstrating correct usage of the `useEffect` hook:
+The team must implement the following features, demonstrating correct usage of the React hooks:
 
-| Feature | Component | `useEffect` Implementation | Dependency Array |
+| Feature | Component | Dependency Array |
 | :--- | :--- | :--- | :--- |
 | **1. Initial Job Fetch** | `JobListPage.jsx` | Fetch the list of all jobs when the component first mounts. | `[]` (Empty Array) |
 | **2. Category Filter Fetch** | `FilterSidebar.jsx` | Fetch the list of categories when the component mounts. | `[]` (Empty Array) |
