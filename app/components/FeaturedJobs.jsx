@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MapPin, Clock, DollarSign } from "lucide-react";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 export default function FeaturedJobs() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -57,9 +60,9 @@ export default function FeaturedJobs() {
               </div>
 
               {/* Right side */}
-              <button className="mt-4 sm:mt-0 bg-emerald-600 text-white font-medium px-5 py-2 rounded-md hover:bg-emerald-700 transition">
+              <Button className="rounded-md" onClick={() => navigate(`/jobs/${job.id}`)}>
                 View Details
-              </button>
+              </Button>
             </div>
           ))}
         </div>
