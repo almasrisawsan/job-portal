@@ -7,6 +7,9 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 import "./app.css";
 
 export function Layout({ children }) {
@@ -19,9 +22,11 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body className="overflow-x-hidden">
+        <Header />
         {children}
         <ScrollRestoration />
         <Scripts />
+        <Footer />
       </body>
     </html>
   );
