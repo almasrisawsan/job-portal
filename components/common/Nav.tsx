@@ -3,8 +3,8 @@ import { Link } from "react-router";
 
 export default function Nav() {
   return (
-    <nav className="flex justify-between">
-      <div className="font-extrabold text-4xl">
+    <nav className="flex justify-between px-11">
+      <div className="font-extrabold text-4xl text-primary">
         <Link to={"/"}>JobsPortal</Link>
       </div>
       <div>
