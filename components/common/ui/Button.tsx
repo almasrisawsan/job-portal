@@ -6,7 +6,7 @@ interface ButtonProps {
 export default function Button({ variant, children }: ButtonProps) {
   return (
     <button
-      className={`${variant === "ghost" ? "text-primary" : "bg-primary"} text-xl font-semibold px-9 py-3.5`}
+      className={`${variant === "ghost" ? "text-primary" : "bg-primary"} text-xl font-semibold px-9 py-3.5 rounded-lg`}
     >
       {children}
     </button>
