@@ -4,6 +4,7 @@ import { MapPin, Clock, DollarSign } from "lucide-react";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import { GetJobs } from "../api/api";
 
 export default function FeaturedJobs() {
   const [jobs, setJobs] = useState([]);
@@ -11,16 +12,16 @@ export default function FeaturedJobs() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs")
-      .then((res) => {
-        setJobs(res.data.slice(0, 5));
+    const fetchJobs = async () => {
+      try {
+        const response = await GetJobs();
+        setJobs(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching jobs:", err);
-        setLoading(false);
-      });
+      }
+    };
   }, []);
 
   return (
@@ -59,8 +60,10 @@ export default function FeaturedJobs() {
                 </div>
               </div>
 
-              {/* Right side */}
-              <Button className="rounded-md" onClick={() => navigate(`/jobs/${job.id}`)}>
+              <Button
+                className="rounded-md"
+                onClick={() => navigate(`/jobs/${job.id}`)}
+              >
                 View Details
               </Button>
             </div>

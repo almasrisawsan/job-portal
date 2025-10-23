@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Loading from "../components/Loading"; // تأكد أنه موجود أو أضف div بسيط بدلًا منه
+import Loading from "../components/Loading";
 
 export default function JobsList() {
-  const { id } = useParams(); // ✅ أخذ categoryId من الرابط
+  const { id } = useParams();
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,6 @@ export default function JobsList() {
     axios
       .get("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs")
       .then((res) => {
-        // ✅ فلترة الوظائف حسب categoryId
         const filtered = res.data.filter(
           (job) => String(job.categoryId) === String(id)
         );

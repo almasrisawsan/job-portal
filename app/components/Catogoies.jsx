@@ -3,6 +3,7 @@ import axios from "axios";
 import icon from "../welcome/icon.png";
 import Loading from "./Loading";
 import { useNavigate } from "react-router";
+import { GetCatogries } from "../api/api";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -10,16 +11,18 @@ export default function Categories() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("https://68f8f8e8deff18f212b83fba.mockapi.io/categories")
-      .then((res) => {
-        setCategories(res.data);
+    const fetchCategories = async () => {
+      try {
+        const response = await GetCatogries();
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching categories:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   return (
