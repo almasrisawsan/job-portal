@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
-
+interface IJob {
+  title: string
+  description: string,
+  type: string, 
+  salary: number,
+  company: string,
+  location: string
+  requirements?: string[]
+}
 function JobDetails() {
-  const [job, setJob] = useState(null);
+  const [job, setJob] = useState<IJob | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
