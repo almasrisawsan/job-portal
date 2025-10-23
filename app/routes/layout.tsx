@@ -1,11 +1,12 @@
 import Footer from "components/Footer";
 import Nav from "components/Nav";
+import { Outlet } from "react-router";
 
-export default function Layout({ children }: any) {
+export default function Layout() {
   return (
     <>
       <Nav />
-      <div>{children}</div>
+      <Outlet />
       <Footer />
     </>
   );
