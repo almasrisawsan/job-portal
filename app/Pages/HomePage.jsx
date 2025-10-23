@@ -1,5 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import HeroSection from "../components/HeroSection";
+import Categories from "../components/Catogoies";
+import FeaturedJobs from "../components/FeaturedJobs";
 
 export default function HomePage() {
-  return <div>HomePage</div>;
+  const [loading, setLoading] = useState(false);
+  return (
+    <div>
+      <HeroSection />
+      <Categories />
+      <FeaturedJobs />
+    </div>
+  );
 }

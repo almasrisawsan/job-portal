@@ -28,7 +28,7 @@ export default function Button({
   const sizeStyles = {
     sm: "h-5 w-5 text-xs",
     md: "px-4 py-2 text-base",
-    lg: "md:px-10 md:py-4 py-2 px-5 text-base  rounded-md",
+    lg: "md:px-10 md:py-3 py-2 px-5 text-base  rounded-md",
     cicle: "xxsm:h-10 xxsm:w-10 w-8 h-8 xxsm:text-lg text-sm",
   };
 
