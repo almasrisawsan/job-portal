@@ -1,0 +1,15 @@
+body {
+    color:#338573 ;
+}
+
+.post-btn{
+    background-color:#338573 ;
+    color: white;
+}
+.container:hover{
+    color:#276f5b ;
+}
+
+.post-btn:hover{
+    background-color:#276f5b ;
+}
