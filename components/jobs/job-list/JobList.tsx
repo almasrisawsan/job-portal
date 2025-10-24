@@ -20,7 +20,7 @@ function JobList() {
         setError("Failed to fetch jobs");
         setLoading(false);
       });
-  }, []);ٍ
+  }, []);
 
   if (error)
     return (
