@@ -6,11 +6,13 @@ function Header() {
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
 
         <div className="logo">
+          
           <Link to="/">
             <h1 className="text-2xl font-bold transition-colors">
               JobsPortal
             </h1>
           </Link>
+
         </div>
 
         <div className="flex space-x-4 items-center">
@@ -20,6 +22,7 @@ function Header() {
           >
             Dashboard
           </Link>
+
           <Link to="/">
             <button className="px-4 py-2 rounded-lg  transition-colors shadow-md  post-btn">
               Post a Job
