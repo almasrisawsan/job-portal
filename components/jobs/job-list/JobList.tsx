@@ -14,6 +14,7 @@ function JobList() {
       .get("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs")
       .then((response) => {
         setJobs(response.data);
+        console.log(response.data);
         setLoading(false);
       })
       .catch(() => {
