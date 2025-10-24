@@ -10,14 +10,14 @@
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.35 0.15 264);
+  --primary: oklab(56.138% -0.08414 0.00569);
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.96 0 0);
   --secondary-foreground: oklch(0.15 0 0);
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.5 0 0);
   --accent: oklch(0.95 0.01 264);
-  --accent-foreground: oklch(0.35 0.15 264);
+  --accent-foreground: oklab(56.138% -0.08414 0.00569);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.9 0 0);
@@ -41,13 +41,13 @@
 
 .dark {
   --background: oklch(0.12 0 0);
-  --foreground: oklch(0.98 0 0);
+  --foreground: #f8f8f8;
   --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.98 0 0);
+  --card-foreground: #f8f8f8;
   --popover: oklch(0.15 0 0);
   --popover-foreground: oklch(0.98 0 0);
   --primary: oklch(0.55 0.2 264);
-  --primary-foreground: oklch(0.98 0 0);
+  --primary-foreground: #f8f8f8;
   --secondary: oklch(0.22 0 0);
   --secondary-foreground: oklch(0.98 0 0);
   --muted: oklch(0.22 0 0);
@@ -75,7 +75,7 @@
 }
 
 @theme inline {
-  --font-sans: "Geist", "Geist Fallback";
+  --font-sans: "Poppins", sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
