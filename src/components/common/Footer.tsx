@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <div className="text-white text-xl bg-primary text-center py-5">
+    <footer className="bg-primary px-4 py-4 md:py-6 text-white text-sm md:text-base text-center">
       © 2025 Jobs Portal. Designed By Wilson Kinyua.
-    </div>
+    </footer>
   );
 }

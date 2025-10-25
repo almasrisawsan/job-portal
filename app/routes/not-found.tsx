@@ -1,8 +1,6 @@
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 
 export default function NotFoundPage() {
-  const navigate = useNavigate();
-
   return (
     <div className="flex flex-col justify-center items-center bg-gray-100 px-4 min-h-screen">
       <h1 className="font-extrabold text-red-600 text-6xl md:text-8xl">404</h1>
