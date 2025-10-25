@@ -1,12 +1,9 @@
-import DetailsJob from "../Pages/DetailsJob";
+import React from 'react'
 
-export function meta() {
-  return [
-    { title: "Job Details" },
-    { name: "description", content: "View job details" },
-  ];
+function details() {
+  return (
+    <div>details</div>
+  )
 }
 
-export default function Details() {
-  return <DetailsJob />;
-}
+export default details

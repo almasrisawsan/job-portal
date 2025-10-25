@@ -8,9 +8,9 @@ export default function Header() {
         <Link to={'/'} className="text-2xl font-bold text-primary">JobsPortal</Link>
         <div className="flex gap-2 items-center">
           <h2 className="text-primary text-sm font-medium">Dashboard</h2>
-          <Button className="rounded-md" size="md">
+          <Link to={'/jobs/new'} className="rounded-md" size="md">
             Post a job
-          </Button>
+          </Link>
         </div>
       </div>
     </header>
