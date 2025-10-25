@@ -1,9 +1,9 @@
 import React from "react";
-import { Title } from "components/common/ui/Title";
 import { BoxCategories } from "./BoxCategories";
 import { Container } from "components/common/ui/Container";
 import { popular } from "./fackData";
-import type { Category } from "../../@types/category";
+import type { Category } from "../../types/category.type";
+import SectionTitle from "components/common/ui/SectionTitle";
 
 export const PopularCategories: React.FC = () => {
     const categories: Category[] = popular;
@@ -12,7 +12,7 @@ export const PopularCategories: React.FC = () => {
     return (
         <Container>
             <section className="w-full py-10 px-4 md:px-8">
-                <Title title="Popular Categories" />
+                <SectionTitle title="Popular Categories" />
 
                 {categories.length > 0 ? (
                     <div

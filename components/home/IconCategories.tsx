@@ -21,7 +21,7 @@ export const IconCategories: React.FC<IconCategoriesProps> = ({ id, title }) => 
       </div>
 
       {/* Title */}
-      <div className="font-semibold text-[18px] text-gray-800 dark:text-light text-center">
+      <div className="font-semibold text-[18px] text-center">
         {title || "Untitled"}
       </div>
     </div>

@@ -18,7 +18,7 @@ export const DetailsJobs: React.FC = () => {
             key={job.id}
             className="
               flex flex-col sm:flex-row justify-between items-center
-              bg-white dark:bg-gray-900 rounded-[10px]
+             rounded-[10px]
               border border-light dark:border-gray-700
               shadow-[0px_2px_4px_0px_#00000026]
               p-6 gap-6 w-full

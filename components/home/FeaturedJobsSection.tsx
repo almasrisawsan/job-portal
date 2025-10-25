@@ -1,12 +1,12 @@
-import { Title } from 'components/common/ui/Title'
 import { Container } from 'components/common/ui/Container'
 import { DetailsJobs } from './DetailsJobs'
+import SectionTitle from 'components/common/ui/SectionTitle'
 
 export const FeaturedJobs = () => {
   return (
     <div>
       <Container>
-        <Title title="Featured Jobs" />
+        <SectionTitle title="Featured Jobs" />
         <DetailsJobs />
       </Container>
     </div>
