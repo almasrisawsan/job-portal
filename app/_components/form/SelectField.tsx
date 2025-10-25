@@ -1,6 +1,10 @@
 import React from "react";
 
-function SelectField({ label, options }) {
+interface IProps {
+    label: string,
+    options: string[]
+}
+function SelectField({ label, options }: IProps) {
   return (
     <div className="flex flex-col">
       <label className="mb-2 font-medium text-gray-700">{label}</label>

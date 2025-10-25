@@ -9,7 +9,7 @@ type Job = {
   description: string;
 };
 
-export default function JobInfoPage() {
+export default function JobInfo() {
   const { id } = useParams();
   console.log("🚀 ~ JobPage ~ id:", id);
   const [job, setJob] = useState<Job | null>(null);

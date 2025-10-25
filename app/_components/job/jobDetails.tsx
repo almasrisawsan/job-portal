@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
-interface IJob {
-  title: string
-  description: string,
-  type: string, 
-  salary: number,
-  company: string,
-  location: string
-  requirements?: string[]
-}
+import { useEffect, useState } from "react";
+import type { IJob } from "~/@types";
+
 function JobDetails() {
   const [job, setJob] = useState<IJob | null>(null);
   const [loading, setLoading] = useState(true);

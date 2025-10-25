@@ -1,6 +1,6 @@
 // components/JobForm.jsx
 import React from "react";
-import Button from "./Button";
+import Button from "../../_components/job/Button";
 import Containar from "./Containar";
 
 import Footer from  "./Footer"

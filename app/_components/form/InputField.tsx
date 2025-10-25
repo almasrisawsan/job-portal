@@ -1,6 +1,9 @@
 import React from "react";
-
-function InputField({ label, placeholder }) {
+interface IProps {
+    label: string,
+    placeholder: string
+}
+function InputField({ label, placeholder }: IProps) {
   return (
     <div className="flex flex-col">
       <label className="mb-2 font-medium text-gray-700">{label}</label>

@@ -1,6 +1,11 @@
 import React from "react";
 
-function TextAreaField({ label, placeholder, rows = 5 }) {
+interface IProps {
+    label: string,
+    placeholder: string,
+    rows?: number
+}
+function TextAreaField({ label, placeholder, rows = 5 }: IProps) {
   return (
     <div className="flex flex-col">
       <label className="mb-2 font-medium text-gray-700">{label}</label>

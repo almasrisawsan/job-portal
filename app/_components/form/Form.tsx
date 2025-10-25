@@ -1,9 +1,9 @@
-import React from "react";
 import FormHeader from "./FormHeader";
 import InputField from "./InputField";
 import SelectField from "./SelectField";
-import TextAreaField from "./TextAreaField";
 import SubmitButton from "./SubmitButton";
+import TextAreaField from "./TextAreaField";
+
 
 function Form() {
   return (

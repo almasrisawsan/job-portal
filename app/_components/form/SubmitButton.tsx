@@ -1,6 +1,9 @@
 import React from "react";
 
-function SubmitButton({ label }) {
+interface IProps {
+    label: string
+}
+function SubmitButton({ label }: IProps) {
   return (
     <div className="flex justify-end mt-6">
       <button
