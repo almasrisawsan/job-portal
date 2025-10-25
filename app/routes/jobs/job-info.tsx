@@ -1,9 +1,23 @@
-import { Link, useParams } from "react-router";
-import { FAKE_JOBS } from "content/fake-data-jobs";
+import type { Job } from "src/types/jobs.type";
+import { useLoaderData, type LoaderFunctionArgs, Link } from "react-router";
+import { AppAPI } from "src/services/axios";
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  const id = params.id;
+  if (!id) throw new Response("Job ID not provided", { status: 400 });
+
+  try {
+    const job = (await AppAPI.get(`/jobs/${id}`)) as Job;
+    return job;
+  } catch (error: any) {
+    throw new Response(error.error || "Job not found", {
+      status: error.status || 404,
+    });
+  }
+}
 
 export default function JobInfoPage() {
-  const { id } = useParams<{ id: string }>();
-  const job = FAKE_JOBS.find((j) => j.id === id);
+  const job: Job = useLoaderData<typeof loader>();
 
   if (!job) return <div className="p-4">Job not found</div>;
 
@@ -20,10 +34,13 @@ export default function JobInfoPage() {
       </div>
 
       <div className="flex md:flex-row flex-col justify-center items-center gap-4 md:gap-6 mt-6 px-4 w-full">
-        <Link to={job.companyUrl} target="_blank" rel="noopener noreferrer">
-          <button className="bg-white border border-gray-300 rounded-md w-full md:w-48 h-12 md:h-14 text-base md:text-lg lg:text-xl hover:cursor-pointer">
-            View Company
-          </button>
+        <Link
+          to={job.companyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex justify-center items-center bg-white border border-gray-300 rounded-md w-full md:w-48 h-12 md:h-14 text-base md:text-lg lg:text-xl text-center hover:cursor-pointer"
+        >
+          View Company
         </Link>
 
         <button className="bg-primary rounded-md w-full md:w-48 h-12 md:h-14 text-white text-base md:text-lg lg:text-xl hover:cursor-pointer">

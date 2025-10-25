@@ -1,4 +1,4 @@
-import type { Job } from "types/jobs.type";
+import type { Job } from "src/types/jobs.type";
 
 
 export const FAKE_JOBS: Job[] = [
