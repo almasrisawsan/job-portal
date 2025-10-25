@@ -1,4 +1,6 @@
+import Hero from "components/home/Hero";
 import type { Route } from "./+types/home";
+import PopularCategories from "components/home/PopularCategories";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,5 +10,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <Hero />
+      <PopularCategories />
+    </>
+  );
 }
