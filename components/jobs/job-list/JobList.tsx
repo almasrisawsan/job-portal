@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import {type Job } from "types/jobs"; // import your type
+// import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { type Job } from "types/jobs"; // import your type
 import "../../../app/app.css";
 
 function JobList() {

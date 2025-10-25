@@ -12,7 +12,7 @@ export default function Nav() {
           <Link to={""}>Dashboard</Link>
         </Button>
         <Button variant="default">
-          <Link to={""}>Post a Job</Link>
+          <Link className="text-white" to={""}>Post a Job</Link>
         </Button>
       </div>
     </nav>
