@@ -3,7 +3,7 @@ import Button from "components/common/ui/Button";
 import { JobLogo } from "./JobLogo";
 import { JobInfo } from "./JobInfo";
 import { featuredJobs } from "./fackData"; 
-import type { Job } from "../../@types/jobs";
+import type { Job } from "../../types/jobs";
 
 export const DetailsJobs: React.FC = () => {
   const jobs: Job[] = featuredJobs;
