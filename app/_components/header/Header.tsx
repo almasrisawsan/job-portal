@@ -23,7 +23,7 @@ function Header() {
             Dashboard
           </Link>
 
-          <Link to="/">
+          <Link to="/jobs/create-job">
             <button className="px-4 py-2 rounded-lg  transition-colors shadow-md  post-btn">
               Post a Job
             </button>

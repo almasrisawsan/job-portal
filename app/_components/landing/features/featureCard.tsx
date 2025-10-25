@@ -1,21 +1,29 @@
-
 import { MapPin, Clock } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
+export interface IProps {
+  jobId: string | number;
+  companyName?: string;
+  jobTitle?: string;
+  location?: string;
+  jobType?: string;
+  salary?: string;
+  companyInitial?: string;
+}
 const JobCard = ({ 
+  jobId,
   companyName = "Match Company Limited",
   jobTitle = "Fresher UI/UX Designer (3 Year Exp.)",
   location = "Nairobi, Kenya",
   jobType = "Full Time",
   salary = "Ksh 150,000",
-  companyInitial = "J",
-  companyColor = "bg-teal-700"
-}) => {
+  companyInitial = "C",
+}: IProps) => {
   return (
     <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
 
       <div className="flex items-center gap-4">
 
-        <div className={`w-14 h-14 ${companyColor} rounded-full flex items-center justify-center flex-shrink-0`}>
+        <div className={`w-14 h-14 bg-teal-700 rounded-full flex items-center justify-center flex-shrink-0`}>
           <span className="text-white font-bold text-2xl font-poppins">
             {companyInitial}
           </span>
@@ -49,9 +57,12 @@ const JobCard = ({
         </div>
       </div>
 
-      <button className="bg-teal-700 text-white px-6 py-2.5 rounded-lg font-poppins font-medium hover:bg-teal-800 transition-colors whitespace-nowrap">
+      <Link 
+        to={`/jobs/${jobId}`}
+        className="bg-teal-700 text-white px-6 py-2.5 rounded-lg font-poppins font-medium hover:bg-teal-800 transition-colors whitespace-nowrap inline-flex items-center justify-center"
+      >
         View Details
-      </button>
+      </Link>
     </div>
   );
 };
