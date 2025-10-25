@@ -7,7 +7,7 @@ export default [
         ...prefix("jobs", [
             route(":id", "routes/jobs/job-info.tsx"),
             route("/create-job", "routes/jobs/create-job.tsx"),
-            route("/job-list", "routes/jobs/job-list.tsx"),
+            route("/job-list", "routes/jobs/JobList.tsx"),
         ]),
 
         // Catch-all route for unmatched URLs

@@ -77,4 +77,18 @@ export const featuredJobs = [
     isFeatured: true,
     categoryId: 1,
   },
+    {
+    id: "0",
+    title: "Loading Job Data...",
+    company: "Placeholder Corp",
+    companyUrl: "https://dummyimage.com/60x60/ccc/fff&text=?",
+    location: "Remote",
+    type: "Full-Time",
+    salary: "$0",
+    tags: ["React", "Placeholder"],
+    description: "This is mock job data shown until the API loads.",
+    requirements: [],
+    isFeatured: true,
+    categoryId: 1,
+  },
 ];
