@@ -1,5 +1,5 @@
-export type Category = {
-  id: number | string;
-  name: string;
+export interface Category {
+  id: string;
+  title: string;
   createdAt?: string;
-};
+}
