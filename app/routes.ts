@@ -9,5 +9,8 @@ export default [
             route("/create-job", "routes/jobs/create-job.tsx"),
             route("/job-list", "routes/jobs/job-list.tsx"),
         ]),
+
+        // Catch-all route for unmatched URLs
+        route("*", "routes/error-boundary.tsx"),
     ]),
 ] satisfies RouteConfig;
