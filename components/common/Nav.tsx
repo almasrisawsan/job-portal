@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function Nav() {
   return (
-    <nav className="flex justify-between px-11">
+    <nav className="flex justify-between px-11 py-5">
       <div className="font-extrabold text-4xl text-primary">
         <Link to={"/"}>JobsPortal</Link>
       </div>
@@ -12,7 +12,7 @@ export default function Nav() {
           <Link to={""}>Dashboard</Link>
         </Button>
         <Button variant="default">
-          <Link to={""}>Post a Job</Link>
+          <Link className="text-white" to={""}>Post a Job</Link>
         </Button>
       </div>
     </nav>

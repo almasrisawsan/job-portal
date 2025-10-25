@@ -7,14 +7,21 @@
   --color-primary: #338573;
   --color-secondary: #eff6f2;
   --color-secondary-dark: #bdd8d2;
-  --color-light: #F4F5F7;
+  --color-light: #f4f5f7;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+@layer base {
+  input:focus {
+    @apply outline-none;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    @apply font-medium text-gray-400;
+  }
+  textarea:focus {
+    @apply outline-none;
+  }
+  select:focus {
+    @apply outline-none;
   }
 }
