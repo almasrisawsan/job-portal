@@ -45,7 +45,7 @@ export default function FeaturedJobCard({ job }: { job: Job }) {
 
       <div className="mt-3 sm:mt-0 w-full sm:w-auto">
         <NavLink to={ROUTES.JOBS.INFO(job.id)}>
-          <Button className="bg-primary w-full sm:w-auto !font-normal text-white cursor-pointer">
+          <Button className="bg-primary w-full sm:w-auto font-normal text-white cursor-pointer">
             View Details
           </Button>
         </NavLink>
