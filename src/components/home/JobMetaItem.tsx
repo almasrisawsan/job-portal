@@ -14,7 +14,7 @@ export const JobMetaItem: React.FC<JobMetaItemProps> = ({ icon, label }) => {
       </i>
 
       {/* Label */}
-      <span className="text-[15px] tracking-[0px] text-gray-800 dark:text-light">
+      <span className="text-[15px] tracking-[0px]">
         {label}
       </span>
     </div>
