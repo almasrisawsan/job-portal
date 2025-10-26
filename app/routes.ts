@@ -5,12 +5,10 @@ export default [
         index("routes/home.tsx"),
 
         ...prefix("jobs", [
-            route(":id", "routes/jobs/job-info.tsx"),
+            route("/job-info/:id", "routes/jobs/job-info.tsx"),
             route("/create-job", "routes/jobs/create-job.tsx"),
-            route("/job-list", "routes/jobs/JobList.tsx"),
+            route("/job-list", "routes/jobs/Job-list.tsx"),
         ]),
-
-        // Catch-all route for unmatched URLs
-        route("*", "routes/error-boundary.tsx"),
+        route("*", "routes/not-found.tsx"),
     ]),
 ] satisfies RouteConfig;
