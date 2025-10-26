@@ -1,19 +1,37 @@
-import Hero from "components/home/Hero";
-import type { Route } from "./+types/home";
-import { FeaturedJobs } from "components/home/FeaturedJobsSection";
-import { PopularCategories } from "components/home/PopularCategoriesSection";
+import HeroSection from "src/components/home/hero-section";
+import PopularCategories from "src/components/home/popular-categories";
+import FeaturedJobs from "src/components/home/featured-jobs";
+import { AppAPI } from "src/services/api";
+import { useLoaderData } from "react-router";
+import type { Category } from "src/types/category.type";
+import type { Job } from "src/types/jobs.type";
 
-export function meta({ }: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
+export async function loader() {
+  try {
+    const [categoriesRes, jobsRes] = await Promise.all([
+      AppAPI.get("/categories/"),
+      AppAPI.get("/jobs"),
+    ]);
+
+    const categories = categoriesRes.data as Category[];
+    const jobs = jobsRes.data as Job[];
+
+    return { categories, jobs };
+  } catch (error: any) {
+    throw new Response(error.error || "Failed to load data", {
+      status: error.status || 500,
+    });
+  }
 }
 
 export default function Home() {
-  return <div>
-    <Hero />
-    <PopularCategories />
-    <FeaturedJobs />
-    </div>;
+  const { categories, jobs } = useLoaderData<typeof loader>();
+
+  return (
+    <>
+      <HeroSection />
+      <PopularCategories categories={categories} />
+      <FeaturedJobs jobs={jobs} />
+    </>
+  );
 }
