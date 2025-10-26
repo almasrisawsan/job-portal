@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { GetJobsByid, UpdateJob } from "../api/api";
 import JobForm from "../components/JobForm";
+import Button from "../components/Button";
 
 export default function EditPage() {
   const { id } = useParams();
@@ -10,6 +11,7 @@ export default function EditPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [updating, setUpdating] = useState(false);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -23,7 +25,7 @@ export default function EditPage() {
         console.error("Error fetching job:", err);
       } finally {
         setLoading(false);
-      }
+      } 
     };
 
     fetchJob();
@@ -33,26 +35,11 @@ export default function EditPage() {
     setUpdating(true);
     setError(null);
     try {
-      const updatedJob = {
-        company: formData.companyName,
-        companyUrl: formData.companyWebsite,
-        title: formData.jobTitle,
-        category: formData.category,
-        type: formData.jobType,
-        location: formData.location,
-        salary: formData.salary,
-        experience: formData.experience,
-        featured: formData.featured,
-        description: formData.description,
-      };
-
-      await UpdateJob(id, updatedJob);
-      alert("Job updated successfully!");
-      navigate(`/jobs/${id}`);
+      await UpdateJob(id, formData);
+      setUpdateSuccess(true);
     } catch (err) {
       setError(err.message);
       console.error("Error updating job:", err);
-      alert("Failed to update job. Please try again.");
     } finally {
       setUpdating(false);
     }
@@ -95,8 +82,31 @@ export default function EditPage() {
         </div>
       )}
 
+      {/* Success Message */}
+      {updateSuccess && (
+        <div className="bg-teal-50 border border-teal-500 text-teal-700 px-6 py-4 rounded-lg mb-6 max-w-xl mx-auto">
+          <h3 className="font-bold text-lg mb-2">Job Updated Successfully!</h3>
+          <p className="mb-4">Your changes have been saved.</p>
+          <div className="flex gap-3">
+            <Button
+              onClick={() => navigate(`/jobs/${id}`)}
+              className="bg-teal-600 hover:bg-teal-700 px-6 py-2 rounded-md text-white"
+            >
+              View Job
+            </Button>
+            <Button
+              onClick={() => setUpdateSuccess(false)}
+              variant="outline"
+              className="border-teal-600 text-teal-600 hover:bg-teal-50 px-6 py-2 rounded-md"
+            >
+              Edit Again
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Job Form */}
-      {!loading && !error && job && (
+      {!loading && !error && job && !updateSuccess && (
         <JobForm
           initialData={job}
           onSubmit={handleSubmit}

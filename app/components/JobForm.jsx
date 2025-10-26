@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { z } from "zod";
 import Button from "./Button";
+import { GetCatogries } from "../api/api";
 
 // Zod validation schema
 const jobFormSchema = z.object({
-  companyName: z.string().min(2, "Company name must be at least 2 characters"),
-  companyWebsite: z
+  company: z.string().min(2, "Company name must be at least 2 characters"),
+  logo: z
     .string()
     .refine(
       (val) => val === "" || /^https?:\/\/.+/.test(val),
       "Please enter a valid URL"
     ),
-  jobTitle: z.string().min(3, "Job title must be at least 3 characters"),
+  title: z.string().min(3, "Job title must be at least 3 characters"),
   category: z.string().min(1, "Category is required"),
-  jobType: z.string().min(1, "Job type is required"),
+  type: z.string().min(1, "Job type is required"),
   location: z.string().min(2, "Location must be at least 2 characters"),
   salary: z.string().optional(),
-  experience: z.string().optional(),
-  featured: z.string(),
   description: z.string().min(10, "Description must be at least 10 characters"),
+  postedAt: z.string(),
 });
 
 const JobForm = ({
@@ -29,19 +29,46 @@ const JobForm = ({
   title = "Create a Job",
 }) => {
   const [formData, setFormData] = useState({
-    companyName: initialData.company || "",
-    companyWebsite: initialData.companyUrl || "",
-    jobTitle: initialData.title || "",
-    category: initialData.category || "Technology",
-    jobType: initialData.type || "Full Time",
+    company: initialData.company || "",
+    logo: initialData.logo || "",
+    title: initialData.title || "",
+    category: initialData.category || "",
+    type: initialData.type || "Full-time",
     location: initialData.location || "",
     salary: initialData.salary || "",
-    experience: initialData.experience || "",
-    featured: initialData.featured || "Yes",
     description: initialData.description || "",
+    postedAt:
+      initialData.postedAt || new Date().toISOString().split("T")[0],
   });
 
   const [errors, setErrors] = useState({});
+  const [categories, setCategories] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await GetCatogries();
+        setCategories(response.data);
+        // Set default category if not already set and no initial data
+        if (!initialData.category && response.data.length > 0) {
+          setFormData((prev) => {
+            if (!prev.category) {
+              return { ...prev, category: response.data[0].name };
+            }
+            return prev;
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -114,7 +141,7 @@ const JobForm = ({
       )}
 
       <div className="space-y-6 bg-white shadow-sm p-6 rounded-lg">
-        {/* Company Name + Website */}
+        {/* Company Name + Logo URL */}
         <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
           <div>
             <label className="block mb-2 font-medium text-gray-700 text-sm">
@@ -122,40 +149,38 @@ const JobForm = ({
             </label>
             <input
               type="text"
-              name="companyName"
-              value={formData.companyName}
+              name="company"
+              value={formData.company}
               onChange={handleChange}
               placeholder="Name"
               className={`bg-white px-3 py-2.5 border rounded-md focus:outline-none focus:ring-2 w-full text-sm placeholder-gray-400 ${
-                errors.companyName
+                errors.company
                   ? "border-red-500 focus:ring-red-500"
                   : "border-gray-300 focus:ring-teal-500"
               }`}
             />
-            {errors.companyName && (
-              <p className="mt-1 text-red-500 text-xs">{errors.companyName}</p>
+            {errors.company && (
+              <p className="mt-1 text-red-500 text-xs">{errors.company}</p>
             )}
           </div>
           <div>
             <label className="block mb-2 font-medium text-gray-700 text-sm">
-              Company Website
+              Company Logo URL
             </label>
             <input
               type="text"
-              name="companyWebsite"
-              value={formData.companyWebsite}
+              name="logo"
+              value={formData.logo}
               onChange={handleChange}
-              placeholder="Website Link"
+              placeholder="https://example.com/logo.png"
               className={`bg-white px-3 py-2.5 border rounded-md focus:outline-none focus:ring-2 w-full text-sm placeholder-gray-400 ${
-                errors.companyWebsite
+                errors.logo
                   ? "border-red-500 focus:ring-red-500"
                   : "border-gray-300 focus:ring-teal-500"
               }`}
             />
-            {errors.companyWebsite && (
-              <p className="mt-1 text-red-500 text-xs">
-                {errors.companyWebsite}
-              </p>
+            {errors.logo && (
+              <p className="mt-1 text-red-500 text-xs">{errors.logo}</p>
             )}
           </div>
         </div>
@@ -167,18 +192,18 @@ const JobForm = ({
           </label>
           <input
             type="text"
-            name="jobTitle"
-            value={formData.jobTitle}
+            name="title"
+            value={formData.title}
             onChange={handleChange}
             placeholder="Title"
             className={`bg-white px-3 py-2.5 border rounded-md focus:outline-none focus:ring-2 w-full text-sm placeholder-gray-400 ${
-              errors.jobTitle
+              errors.title
                 ? "border-red-500 focus:ring-red-500"
                 : "border-gray-300 focus:ring-teal-500"
             }`}
           />
-          {errors.jobTitle && (
-            <p className="mt-1 text-red-500 text-xs">{errors.jobTitle}</p>
+          {errors.title && (
+            <p className="mt-1 text-red-500 text-xs">{errors.title}</p>
           )}
         </div>
 
@@ -192,12 +217,23 @@ const JobForm = ({
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="bg-white px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 w-full text-sm appearance-none"
+              disabled={loadingCategories}
+              className={`bg-white px-3 py-2.5 border rounded-md focus:outline-none focus:ring-2 w-full text-sm appearance-none ${
+                errors.category
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-teal-500"
+              }`}
             >
-              <option>Technology</option>
-              <option>Design</option>
-              <option>Marketing</option>
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
             </select>
+            {errors.category && (
+              <p className="mt-1 text-red-500 text-xs">{errors.category}</p>
+            )}
             <ChevronDown
               size={18}
               className="top-10 right-3 absolute text-gray-500 pointer-events-none"
@@ -209,13 +245,14 @@ const JobForm = ({
               Job Type
             </label>
             <select
-              name="jobType"
-              value={formData.jobType}
+              name="type"
+              value={formData.type}
               onChange={handleChange}
               className="bg-white px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 w-full text-sm appearance-none"
             >
-              <option>Full Time</option>
-              <option>Part Time</option>
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contract</option>
               <option>Internship</option>
             </select>
             <ChevronDown
@@ -262,40 +299,25 @@ const JobForm = ({
           </div>
         </div>
 
-        {/* Experience + Featured */}
-        <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
-          <div>
-            <label className="block mb-2 font-medium text-gray-700 text-sm">
-              Experience
-            </label>
-            <input
-              type="text"
-              name="experience"
-              value={formData.experience}
-              onChange={handleChange}
-              placeholder="Experience"
-              className="bg-white px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 w-full text-sm placeholder-gray-400"
-            />
-          </div>
-
-          <div className="relative">
-            <label className="block mb-2 font-medium text-gray-700 text-sm">
-              Featured
-            </label>
-            <select
-              name="featured"
-              value={formData.featured}
-              onChange={handleChange}
-              className="bg-white px-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 w-full text-sm appearance-none"
-            >
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-            <ChevronDown
-              size={18}
-              className="top-10 right-3 absolute text-gray-500 pointer-events-none"
-            />
-          </div>
+        {/* Posted Date */}
+        <div>
+          <label className="block mb-2 font-medium text-gray-700 text-sm">
+            Posted Date
+          </label>
+          <input
+            type="date"
+            name="postedAt"
+            value={formData.postedAt}
+            onChange={handleChange}
+            className={`bg-white px-3 py-2.5 border rounded-md focus:outline-none focus:ring-2 w-full text-sm ${
+              errors.postedAt
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-teal-500"
+            }`}
+          />
+          {errors.postedAt && (
+            <p className="mt-1 text-red-500 text-xs">{errors.postedAt}</p>
+          )}
         </div>
 
         {/* Description */}
