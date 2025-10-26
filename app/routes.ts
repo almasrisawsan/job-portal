@@ -4,5 +4,6 @@ export default [
   index("routes/home.jsx"),
   route("/jobsbycatogries/:id", "routes/jobs.jsx"),
   route("/jobs/new", "routes/form.jsx"),
+  route("/jobs/:id/edit", "routes/edit.jsx"),
   route("/jobs/:id", "routes/details.jsx"),
 ] satisfies RouteConfig;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MapPin, Clock, DollarSign } from "lucide-react";
 import { useNavigate } from "react-router";
 import Button from "./Button";

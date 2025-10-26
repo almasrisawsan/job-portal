@@ -1,3 +1,4 @@
+// import { Link } from "lucide-react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
@@ -8,11 +9,12 @@ export default function Header() {
         <Link to="/">
         <h1 className="text-2xl font-bold text-primary">JobsPortal</h1>
         </Link>
+
         <div className="flex gap-2 items-center">
           <h2 className="text-primary text-sm font-medium">Dashboard</h2>
-          <Button className="rounded-md" size="md">
+          <a href={'/jobs/new'} className="rounded-md bg-primary text-white p-3" size="md">
             Post a job
-          </Button>
+          </a>
         </div>
       </div>
     </header>
