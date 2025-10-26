@@ -22,3 +22,11 @@ export async function GetJobsByCatogriesId(id) {
 export function DeleteJobsByid(id) {
   return axios.delete(`${baseurl}/jobs/${id}`);
 }
+
+export function UpdateJob(id, jobData) {
+  return axios.put(`${baseurl}/jobs/${id}`, jobData);
+}
+
+export function CreateJob(jobData) {
+  return axios.post(`${baseurl}/jobs`, jobData);
+}

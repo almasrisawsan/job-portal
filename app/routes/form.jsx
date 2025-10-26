@@ -1,12 +1,12 @@
-import EditPage from "../Pages/EditPage";
+import CreateJobPage from "../Pages/CreateJobPage";
 
 export function meta() {
   return [
-    { title: "Job Form" },
-    { name: "description", content: "Add or edit a job" },
+    { title: "Create Job" },
+    { name: "description", content: "Create a new job posting" },
   ];
 }
 
 export default function Form() {
-  return <EditPage />;
+  return <CreateJobPage />;
 }
