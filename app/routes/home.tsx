@@ -1,9 +1,9 @@
-import Hero from "src/components/home/hero-section";
 import type { Route } from "./+types/home";
 import PopularCategories from "src/components/home/popular-categories";
 import { AppAPI } from "src/services/api";
-import { useLoaderData, type LoaderFunctionArgs } from "react-router";
+import { useLoaderData } from "react-router";
 import type { Category } from "src/types/category.type";
+import { FeaturedJobs } from "components/home/FeaturedJobsSection";
 import HeroSection from "src/components/home/hero-section";
 
 export function meta({}: Route.MetaArgs) {
@@ -28,9 +28,10 @@ export default function Home() {
   const categories: Category[] = useLoaderData<typeof loader>();
 
   return (
-    <>
+    <div>
       <HeroSection />
       <PopularCategories categories={categories} />
-    </>
+      <FeaturedJobs />
+    </div>
   );
 }
