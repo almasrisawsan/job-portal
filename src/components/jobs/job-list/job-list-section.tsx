@@ -1,13 +1,29 @@
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import type { Job } from "src/types/jobs.type";
 
-export default function JobListSection({ jobs }: { jobs: Job[] }) {
-  if (!jobs)
-    return (
-      <div className="page">
-        <p className="text-red-500 text-center">Jobs not found</p>
-      </div>
-    );
+function JobList() {
+  const jobs = [
+    {
+      id: 1,
+      title: "Software Engineer",
+      company: "Tech Corp",
+      location: "New York, NY",
+      type: "Full-time",
+    },
+    {
+      id: 2,
+      title: "Product Manager",
+      company: "Business Inc",
+      location: "San Francisco, CA",
+      type: "Part-time",
+    },
+    {
+      id: 3,
+      title: "UX Designer",
+      company: "Design Studio",
+      location: "Remote",
+      type: "Contract",
+    },
+  ];
 
   return (
     <div className="page">
