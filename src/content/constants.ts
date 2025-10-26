@@ -3,6 +3,6 @@ export const ROUTES = {
     JOBS: {
         CREATE: "/jobs/create-job",
         INFO: (id: string | number) => (`/jobs/job-info/${id}`),
-        LIST: "/jobs/job-list",
+        LIST: "/jobs",
     },
 } as const;

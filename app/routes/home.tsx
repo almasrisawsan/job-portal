@@ -1,6 +1,6 @@
 import HeroSection from "src/components/home/hero-section";
 import PopularCategories from "src/components/home/popular-categories";
-import FeaturedJobs from "src/components/home/featured-jobs";
+import FeaturedJobs from "src/components/home/featured-jobs/featured-jobs";
 import { AppAPI } from "src/services/api";
 import { useLoaderData } from "react-router";
 import type { Category } from "src/types/category.type";

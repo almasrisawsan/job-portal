@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import { ROUTES } from "src/content/constants";
 
 export default function NotFoundPage() {
   return (
@@ -12,7 +13,7 @@ export default function NotFoundPage() {
       </p>
 
       <NavLink
-        to="/"
+        to={ROUTES.HOME}
         end
         className="bg-blue-600 hover:bg-blue-700 mt-6 px-6 py-2 rounded-md font-medium text-white transition"
       >

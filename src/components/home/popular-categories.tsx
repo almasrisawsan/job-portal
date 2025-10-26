@@ -1,6 +1,6 @@
 import type { Category } from "src/types/category.type";
 import SectionTitle from "../ui/section-title";
-import CategoryList from "./category-list";
+import CategoryList from "./category/category-list";
 
 export default function PopularCategories({
   categories,

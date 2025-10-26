@@ -1,5 +1,5 @@
 import type { Job } from "src/types/jobs.type";
-import SectionTitle from "../ui/section-title";
+import SectionTitle from "../../ui/section-title";
 import FeaturedJobsList from "./featured-jobs-list";
 
 export default function FeaturedJobs({ jobs }: { jobs: Job[] }) {
