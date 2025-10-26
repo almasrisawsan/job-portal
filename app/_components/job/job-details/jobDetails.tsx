@@ -4,6 +4,9 @@ import JobDetailsCard from "./jobDetailsCard";
 import { useParams } from "react-router-dom";
 import { mapJobToDisplay } from "../utils/resMapper.util";
 import FullPageLoader from "~/_components/full-page-loader/fullPageLoader";
+import { toast } from "sonner";
+import { api } from "api/api";
+
 
 function JobDetails() {
   const {id} = useParams();
@@ -16,17 +19,15 @@ useEffect(() => {
   const load = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`https://68f8f8e8deff18f212b83fba.mockapi.io/jobs/${id}`);
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      
-      const data: IJobFromAPI = await res.json();
+        const { data } = await api.get<IJobFromAPI>(
+          `/jobs/${id}`
+        );
 
       const dataMapForDisplay = mapJobToDisplay(data);
 
       if (!ignore) setJob(dataMapForDisplay);
     } catch (err) {
-      console.error(err);
+      toast.error("Failed to load job details");
     } finally {
       if (!ignore) setLoading(false);
     }

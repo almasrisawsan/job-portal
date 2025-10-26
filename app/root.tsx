@@ -11,6 +11,9 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import Header from "./_components/header/Header";
 import Footer from "./_components/footer/Footer";
+import { Toaster } from "sonner";
+import { CategoryProvider } from "./provider/category/categoryContext";
+import { JobProvider } from "./provider/job/jobContext";
 
 
 export const links: Route.LinksFunction = () => [
@@ -39,9 +42,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Header/>
-          {children}
+          <CategoryProvider>
+            <JobProvider>
+              {children}
+            </JobProvider>
+          </CategoryProvider>
         <Footer/>
         <ScrollRestoration />
+        <Toaster richColors />
         <Scripts />
       </body>
     </html>

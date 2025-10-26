@@ -87,7 +87,7 @@ export function JobTable({ items }: IProps) {
             ) : (
               <tr>
                 <td
-                  className="px-6 py-12 text-center text-gray-500"
+                  className="px-6 py-12 text-center text-gray-500 h-screen"
                   colSpan={5}
                 >
                   <div className="flex flex-col items-center justify-center">

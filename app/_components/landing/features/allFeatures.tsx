@@ -1,33 +1,39 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { jobs } from "./constants";
 import JobCard from "./featureCard";
 import type { IJobFromAPI, TJobForDisplay } from "~/@types";
 import { mapJobsToDisplay } from "~/_components/job/utils/resMapper.util";
 import FullPageLoader from "~/_components/full-page-loader/fullPageLoader";
+import { api } from "api/api";
+import { toast } from "sonner";
+import { JobContext } from "~/provider/job/jobContext";
 
 const AllFeatures = () => {
-  const [jobs, setJobs] = useState<TJobForDisplay[]>([]);
+  const [jobs, setAPIJobs] = useState<TJobForDisplay[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-    useEffect(() => {
+  const {setJobs} = useContext(JobContext);
+  useEffect(() => {
     
     let ignore = false;
+
 
     const load = async () => {
       try {
         setLoading(true);
-        const res = await fetch("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          "cache": "force-cache"
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json: IJobFromAPI[] = await res.json();
-        const mapped = mapJobsToDisplay(Array.isArray(json) ? json : []);
-        mapped.length = 5;
-        if (!ignore) setJobs(mapped);
-      } catch {
-        TODO: "Handle error";
+
+        const { data } = await api.get<IJobFromAPI[]>(
+          "/jobs",
+        );
+
+        const mapped = mapJobsToDisplay(Array.isArray(data) ? data : []);
+        const top5 = mapped.slice(0, 5); // clearer than mutating length
+        if (!ignore) {
+          setJobs(mapped);
+          setAPIJobs(top5);
+        } 
+          
+      } catch (err) {
+        toast.error(`Failed to load jobs`);
       } finally {
         if (!ignore) setLoading(false);
       }

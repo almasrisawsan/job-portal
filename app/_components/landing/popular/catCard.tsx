@@ -1,14 +1,17 @@
-import { Box } from "lucide-react";
+import { Box, type LucideIcon } from "lucide-react";
 
-const CategoryCard = ({
-  icon: Icon = Box,           
-  title = "Technology",       
-  bgColor = "bg-teal-100"     
-}) => {
+interface IProps {
+
+  Icon: LucideIcon;
+
+  title: string;
+}
+
+const CategoryCard = ({ Icon, title }: IProps) => {
   return (
     <div className="flex flex-col items-center gap-4 p-6 bg-white rounded-lg hover:shadow-lg transition-shadow cursor-pointer border border-gray-100">
-      
-      <div className={`w-20 h-20 ${bgColor} rounded-full flex items-center justify-center`}>
+
+      <div className={`w-20 h-20 "bg-teal-100" rounded-full flex items-center justify-center`}>
         <Icon className="w-8 h-8 text-teal-700" strokeWidth={1.5} />
       </div>
       

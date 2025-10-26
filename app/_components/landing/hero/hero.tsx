@@ -19,7 +19,7 @@ const Hero = ({
     <section
       aria-label="Job Portal Hero"
       className={[
-        "relative w-full h-screen overflow-hidden isolate",
+        "relative w-full h-screen  isolate",
         "bg-no-repeat",
         "bg-right",
         containOnMobile ? "bg-contain md:bg-cover" : "bg-cover",

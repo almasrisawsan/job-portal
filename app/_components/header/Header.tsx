@@ -17,7 +17,7 @@ function Header() {
 
         <div className="flex space-x-4 items-center">
           <Link 
-            to="/" 
+            to="/jobs/jobs-list" 
             className="font-medium transition-colors"
           >
             Dashboard

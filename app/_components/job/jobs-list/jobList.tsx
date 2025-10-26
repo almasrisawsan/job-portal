@@ -3,6 +3,8 @@ import { mapJobsToDisplay } from "../utils/resMapper.util";
 import type { IJobFromAPI, TJobForDisplay } from "~/@types";
 import { JobTable } from "./jobsTable";
 import FullPageLoader from "../../full-page-loader/fullPageLoader";
+import { toast } from "sonner";
+import { api } from "api/api";
 
 
 const JobList = () => {
@@ -16,13 +18,16 @@ const JobList = () => {
     const load = async () => {
       try {
         setLoading(true);
-        const res = await fetch("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs");
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json: IJobFromAPI[] = await res.json();
-        const mapped = mapJobsToDisplay(Array.isArray(json) ? json : []);
+
+        const {data} = await api.get<IJobFromAPI[]>(
+          "/jobs"
+        );
+    
+        const mapped = mapJobsToDisplay(Array.isArray(data) ? data : []);
         if (!ignore) setJobs(mapped);
-      } catch {
-        TODO: "Handle error";
+
+      } catch (err: unknown) {
+          toast.error(`Failed to load jobs`);      
       } finally {
         if (!ignore) setLoading(false);
       }
