@@ -1,4 +1,3 @@
-import React from "react";
 import type { Job } from "src/types/jobs.type";
 
 export default function HeaderSection({ job }: { job: Job }) {

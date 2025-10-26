@@ -11,7 +11,7 @@ const AppAPI = axios.create({
 
 // Return only data and handle basic errors
 AppAPI.interceptors.response.use(
-    (response) => response.data,  // ✅ This extracts the data automatically
+    (response) => response,  // ✅ This extracts the data automatically
     (error: AxiosError) => {
         if (!error.response) {
             return Promise.reject({ status: 500, error: "Network error" });

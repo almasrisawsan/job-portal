@@ -8,7 +8,7 @@ export default function SearchBar() {
         className="flex-1 px-3 py-2 sm:py-3 border-none rounded-lg sm:rounded-r-none focus:outline-none"
         placeholder="Search by job title..."
       />
-      <Button className="sm:rounded-l-none md:w-auto">Search</Button>
+      <Button className="md:w-auto">Search</Button>
     </div>
   );
 }

@@ -5,8 +5,8 @@ import type { Job } from "src/types/jobs.type";
 
 export async function loader() {
   try {
-    const jobs = (await AppAPI.get(`/jobs`)) as Job[];
-    return jobs;
+    const jobs = await AppAPI.get(`/jobs`);
+    return jobs.data as Job[];
   } catch (error: any) {
     throw new Response(error.error || "Jobs not found", {
       status: error.status || 404,
@@ -15,7 +15,7 @@ export async function loader() {
 }
 
 export default function JobListPage() {
-  const jobs: Job[] = useLoaderData<typeof loader>();
+  const jobs = useLoaderData<typeof loader>();
 
   return <JobListSection jobs={jobs} />;
 }

@@ -10,7 +10,9 @@ export async function loader({ params }: LoaderFunctionArgs) {
   if (!id) throw new Response("Job ID not provided", { status: 400 });
 
   try {
-    const job = (await AppAPI.get(`/jobs/${id}`)) as Job;
+    const jobRes = await AppAPI.get(`/jobs/${id}`);
+    const job = jobRes.data as Job;
+
     return job;
   } catch (error: any) {
     throw new Response(error.error || "Job not found", {
@@ -20,16 +22,14 @@ export async function loader({ params }: LoaderFunctionArgs) {
 }
 
 export default function JobInfoPage() {
-  const job: Job = useLoaderData<typeof loader>();
+  const job = useLoaderData<typeof loader>();
 
   if (!job) return <div className="p-4">Job not found</div>;
 
   return (
     <div className="flex flex-col flex-1 bg-white min-h-screen text-black">
       <HeaderSection job={job} />
-
       <ActionButtons job={job} />
-
       <JobDetailsSection job={job} />
     </div>
   );
