@@ -22,7 +22,7 @@ const JobList = () => {
         const {data} = await api.get<IJobFromAPI[]>(
           "/jobs"
         );
-    
+        console.log(data)
         const mapped = mapJobsToDisplay(Array.isArray(data) ? data : []);
         if (!ignore) setJobs(mapped);
 
