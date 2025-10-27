@@ -7,23 +7,23 @@ const Index = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  fetch("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs")
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Failed to fetch jobs");
-      }
-      return res.json();
-    })
-    .then((data) => {
-      const featuredJobs = data.filter((job) => job.isFeatured === true);
-      setJobs(featuredJobs);
-      setLoading(false);
-    })
-    .catch((err) => {
-      setError(err.message);
-      setLoading(false);
-    });
-}, []);
+    fetch("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch jobs");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        const featuredJobs = data.filter((job) => job.isFeatured === true);
+        setJobs(featuredJobs);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) {
     return (

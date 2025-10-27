@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router";
 
-function Button() {
+function Button({ title }: { title: string }) {
   return (
-    <button className='bg-[#338573] px-5 py-3 rounded-xl border-0 text-[24px] font-bold'>
-      Post a job
+    <button
+      className="bg-[#338573] text-white px-7 py-3 rounded-md border-0  font-bold"
+    >
+      {title}
     </button>
   );
 }

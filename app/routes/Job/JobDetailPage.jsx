@@ -1,14 +1,15 @@
-/*
-import { useParams, useNavigate } from 'react-router-dom'; */
-import { useEffect, useState } from 'react';
-import JobTitle from '../components/JobTitle.jsx'
-import JobDetails from '../components/JobDetails.jsx';
-import JobDescription from '../components/JobDesc.jsx';
-import JobRequirements from '../components/JobRequirements.jsx';
-import JobResponsibilities from '../components/JobResponsibilities.jsx';
+import { useEffect, useState } from "react";
+import JobTitle from "../../components/Jobs/JobTitle.jsx";
+import JobDetails from "../../components/Jobs/JobDetails.jsx";
+import JobDescription from "../../components/Jobs/JobDesc.jsx";
+import JobRequirements from "../../components/Jobs/JobRequirements.jsx";
+import JobResponsibilities from "../../components/Jobs/JobResponsibilities.jsx";
+import { useParams } from "react-router";
 
-export default function JobDetailPage({ id }) {
-  const baseURL = 'https://68f8f8e8deff18f212b83fba.mockapi.io';
+export default function JobDetailPage() {
+  const { id } = useParams();
+
+  const baseURL = "https://68f8f8e8deff18f212b83fba.mockapi.io";
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [job, setJob] = useState(null);
@@ -17,7 +18,7 @@ export default function JobDetailPage({ id }) {
       setIsLoading(true);
       try {
         const response = await fetch(`${baseURL}/jobs/${id}`);
-        if (!response.ok) throw 'no job found';
+        if (!response.ok) throw "no job found";
         const job = await response.json();
         setJob(job);
       } catch (err) {
@@ -28,7 +29,7 @@ export default function JobDetailPage({ id }) {
     };
     fetchPosts();
   }, [id]);
-  if (error||!job) return <JobDetails />;
+  if (error || !job) return <JobDetails />;
 
   //or add a loading page
   if (isLoading) return <h1>Loading job details...</h1>;
