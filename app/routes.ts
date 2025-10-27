@@ -7,6 +7,5 @@ export default [
     route("/job/:jobId", "routes/JobDetails/JobDetails.tsx"),
     route("/create-job", "routes/CreateJob/CreateJob.jsx"),
     route("/dashboard", "routes/Dashboard/Dashboard.jsx"),
-    route("/update/:id", "routes/Dashboard/UpdateJob.jsx"),
   ]),
 ] satisfies RouteConfig;
