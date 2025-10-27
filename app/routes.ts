@@ -6,4 +6,6 @@ export default [
     id: "category-detail",
   }),
   route("job/:id", "routes/job/job.jsx", { id: "user-detail" }),
+  route("/jobs-list","routes/JobListPage.tsx")
+
 ] satisfies RouteConfig;
