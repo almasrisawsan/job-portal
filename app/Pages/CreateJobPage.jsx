@@ -60,7 +60,6 @@ export default function CreateJobPage() {
         </div>
       )}
 
-      {/* Job Form */}
       {!successJobId && (
         <JobForm
           onSubmit={handleSubmit}

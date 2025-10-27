@@ -7,6 +7,8 @@ import { GetJobs } from "../api/api";
 export default function FeaturedJobs() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+    const [error,setError]=useState("")
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +17,7 @@ export default function FeaturedJobs() {
         const response = await GetJobs();
         setJobs(response.data);
       } catch (error) {
+        setError(error)
         console.error("Error fetching jobs:", error);
       } finally {
         setLoading(false);
@@ -26,7 +29,8 @@ export default function FeaturedJobs() {
   return (
     <section className="bg-white py-10">
       <h2 className="text-center text-xl font-semibold mb-8">Featured Jobs</h2>
-
+{error!=""&&
+    <h1 className="text-center">Some thing be wrong </h1>}
       {loading ? (
         // 🔹 Skeleton loader
         <div className="container mx-auto flex flex-col gap-5 px-4">

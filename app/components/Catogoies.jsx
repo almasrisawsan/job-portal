@@ -6,6 +6,7 @@ import { GetCatogries } from "../api/api";
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error,setError]=useState("")
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +15,8 @@ export default function Categories() {
         const response = await GetCatogries();
         setCategories(response.data);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        setError(error)
+        console.error("Error0 fetching categories:", error);
       } finally {
         setLoading(false);
       }
@@ -28,7 +30,8 @@ export default function Categories() {
       <h2 className="text-center text-xl mb-8 text-black font-bold">
         Popular Categories
       </h2>
-
+    {error!=""&&
+    <h1>Some thing be wrong </h1>}
       {loading ? (
         <div className="mx-auto grid grid-cols-2 sm:grid-cols-3 container md:grid-cols-4 lg:grid-cols-5 gap-6">
           {Array.from({ length: 8 }).map((_, index) => (

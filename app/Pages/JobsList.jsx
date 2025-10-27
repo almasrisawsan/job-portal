@@ -9,6 +9,7 @@ export default function JobsList() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingJob, setEditingJob] = useState(null);
+    const [error,setError]=useState("")
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -18,6 +19,7 @@ export default function JobsList() {
         // إذا response هو كائن يحتوي على data
         setJobs(response.data || response); 
       } catch (error) {
+        setError(error)
         console.error("Error fetching jobs:", error);
       } finally {
         setLoading(false);
@@ -37,6 +39,7 @@ export default function JobsList() {
       alert("Job deleted successfully!");
       setJobs((prev) => prev.filter((job) => job.id !== jobid));
     } catch (error) {
+        setError(error)
       console.error("Error deleting job:", error);
       alert("Failed to delete job. Please try again.");
     }
@@ -62,7 +65,8 @@ export default function JobsList() {
           ← Back
         </button>
       </div>
-
+{error!=""&&
+    <h1 className="text-center">Some thing be wrong </h1>}
       {loading ? (
         <div className="bg-white rounded-lg shadow overflow-hidden animate-pulse">
           <div className="bg-gray-50 border-b h-12"></div>
