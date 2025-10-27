@@ -46,7 +46,7 @@ export default function CategoryPage() {
       {!loading && !error && jobs.length > 0 && (
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
           {jobs.map((job) => (
-              <Job key={job.id} job={job}  />
+            <Job key={job.id} job={job} />
           ))}
         </ul>
       )}
