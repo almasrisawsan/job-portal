@@ -12,6 +12,7 @@ function Input({
   className,
   iconClassName,
   name,
+  onFocus,
 }) {
   const border = `border border-gray-300 rounded  px-4`;
   const bg = `bg-white rounded  px-4`;
@@ -40,6 +41,7 @@ function Input({
         )}
 
         <input
+          onFocus={onFocus}
           name={name}
           type={type}
           value={value}

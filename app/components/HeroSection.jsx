@@ -34,9 +34,10 @@ export default function HeroSection() {
 
   useEffect(() => {
     if (searchInput.trim().length > 0) {
-      const filtered = allJobs.filter(job =>
-        job.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchInput.toLowerCase())
+      const filtered = allJobs.filter(
+        (job) =>
+          job.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+          job.company.toLowerCase().includes(searchInput.toLowerCase())
       );
 
       setSuggestions(filtered);
@@ -54,12 +55,6 @@ export default function HeroSection() {
   const handleSearch = () => {
     updateSearchTerm(searchInput);
     setShowSuggestions(false);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
   };
 
   const handleSuggestionSelect = (job) => {
@@ -99,7 +94,6 @@ export default function HeroSection() {
                 placeholder="Search by job title..."
                 value={searchInput}
                 onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
                 onFocus={handleInputFocus}
               />
               <SuggestionsList
