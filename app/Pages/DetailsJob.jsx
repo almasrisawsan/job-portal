@@ -23,15 +23,12 @@ const DetailsJob = () => {
     fetchJob();
   }, [id]);
 
-  // 🔹 Skeleton Loader while loading
   if (loading)
     return (
       <div className="bg-gray-50 min-h-screen py-10 animate-pulse">
         <div className="container mx-auto px-4 md:px-10">
-          {/* Title skeleton */}
           <div className="h-8 bg-gray-300 rounded w-2/3 mx-auto mb-10"></div>
 
-          {/* Card skeleton */}
           <div className="bg-white rounded-2xl shadow-md p-6 md:p-10 space-y-8">
             <div className="flex justify-center items-center gap-3">
               <div className="h-10 w-32 bg-gray-300 rounded"></div>

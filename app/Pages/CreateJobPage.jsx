@@ -26,7 +26,6 @@ export default function CreateJobPage() {
 
   return (
     <div className="container mx-auto py-8">
-      {/* Error Message */}
       {error && (
         <div className="bg-red-50 border border-red-500 text-red-700 px-4 py-3 rounded mb-4 max-w-xl mx-auto">
           <strong className="font-bold">Error: </strong>
@@ -34,7 +33,6 @@ export default function CreateJobPage() {
         </div>
       )}
 
-      {/* Success Message */}
       {successJobId && (
         <div className="bg-teal-50 border border-teal-500 text-teal-700 px-6 py-4 rounded-lg mb-6 max-w-xl mx-auto">
           <h3 className="font-bold text-lg mb-2">Job Created Successfully!</h3>
