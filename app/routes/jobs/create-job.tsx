@@ -31,20 +31,30 @@ export default function CreateJobPage() {
 
     console.log("Posting job data:", jobData);
 
-    // ✅ Real API POST
-    // const response = await fetch("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(jobData),
-    // });
     const res = await axios.post("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs",jobData);
     console.log("API Response:", res.data);
 
 
     const result = res.data;
-    console.log("✅ Fake API Response:", result);
 
-    alert("✅ Job created successfully!");
+    if (result) {
+      alert("Job posted successfully!");
+      // Clear form fields
+      setCompanyName("");
+      setCompanyWebsite("");
+      setJobTitle("");
+      setJobCategory("Technology");
+      setJobType("Full Time");
+      setJobLocation("");
+      setExperience("");
+      setSalaryRange("");
+      setFeatured("Yes");
+      setJobDescription("");
+    }
+    else {
+      alert("Failed to post job. Please try again.");
+    }
+
   };
 
   return (
