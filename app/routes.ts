@@ -5,6 +5,7 @@ export default [
         index("routes/home.tsx"),
 
         ...prefix("jobs", [
+            route("/job-details/:id", "routes/jobs/job-details.tsx"),
             route(":id", "routes/jobs/job-info.tsx"),
             route("/create-job", "routes/jobs/create-job.tsx"),
             route("/job-list", "routes/jobs/job-list.tsx"),
