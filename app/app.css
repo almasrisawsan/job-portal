@@ -13,7 +13,7 @@
 }
 html,
 body {
-  @apply bg-[#F6F7FA] ;
+  @apply bg-[#F6F7FA] text-black ;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
