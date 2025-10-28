@@ -34,7 +34,7 @@ export default function CreateJobPage() {
       )}
 
       {successJobId && (
-        <div className="bg-teal-50 border border-teal-500 text-teal-700 px-6 py-4 rounded-lg mb-6 max-w-xl mx-auto">
+        <div className="bg-teal-50 border border-teal-500 text-teal-700 px-6 py-4 rounded-lg mb-6 max-w-xl mx-auto mt-24">
           <h3 className="font-bold text-lg mb-2">Job Created Successfully!</h3>
           <p className="mb-4">Your job posting has been created and is now live.</p>
           <div className="flex gap-3">
@@ -50,7 +50,7 @@ export default function CreateJobPage() {
                 setError(null);
               }}
               variant="outline"
-              className="border-teal-600 text-teal-600 hover:bg-teal-50 px-6 py-2 rounded-md"
+              className="border-teal-600 text-teal-600 hover:bg-teal-700/70 px-6 py-2 rounded-md"
             >
               Create Another Job
             </Button>

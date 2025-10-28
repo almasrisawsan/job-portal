@@ -17,6 +17,8 @@ export default function Header() {
             className="rounded-md bg-primary text-white p-3"
             size="md"
           >
+          <a href={'/'} className="text-primary hover:text-white hover:bg-primary/95 p-3 rounded-md text-sm font-medium">Dashboard</a>
+          <a href={'/jobs/new'} className="rounded-md bg-primary text-white p-3" size="md">
             Post a job
           </a>
         </div>

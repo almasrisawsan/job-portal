@@ -30,8 +30,8 @@ export default function Categories() {
       <h2 className="text-center text-xl mb-8 text-black font-bold">
         Popular Categories
       </h2>
-    {error!=""&&
-    <h1>Some thing be wrong </h1>}
+    {error!="" &&
+    <h1 className="text-center">Some thing be wrong </h1>}
       {loading ? (
         <div className="mx-auto grid grid-cols-2 sm:grid-cols-3 container md:grid-cols-4 lg:grid-cols-5 gap-6">
           {Array.from({ length: 8 }).map((_, index) => (
