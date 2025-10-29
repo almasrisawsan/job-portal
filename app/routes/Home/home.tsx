@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import HeroSection from "./components/HeroSection";
 import FeaturedJobs from "./components/FeaturedJobs";
-
+import PopularCategories from "./components/PopularCategories";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -14,6 +14,7 @@ export default function Home() {
     <div>
       <HeroSection />
       <FeaturedJobs />
+      <PopularCategories />
     </div>
   );
 }
