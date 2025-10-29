@@ -1,16 +1,9 @@
-// import { Link } from "lucide-react";
 import { motion } from "framer-motion";
-import Button from "./Button";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <motion.header
-      className="bg-white shadow-sm py-4 w-full fixed top-0 z-50"
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
+    <header className="bg-white shadow-sm py-4 w-full fixed top-0 z-50">
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/">
           <motion.h1
@@ -22,12 +15,7 @@ export default function Header() {
           </motion.h1>
         </Link>
 
-        <motion.div
-          className="flex gap-2 items-center"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <motion.div className="flex gap-2 items-center">
           <h2 className="text-primary text-sm font-medium">Dashboard</h2>
 
           <motion.a
@@ -41,6 +29,6 @@ export default function Header() {
           </motion.a>
         </motion.div>
       </div>
-    </motion.header>
+    </header>
   );
 }

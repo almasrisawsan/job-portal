@@ -54,12 +54,7 @@ export default function HeroSection({ jobs }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.h1
-            className="sm:text-4xl text-2xl md:text-7xl font-bold text-gray-900 md:mb-6 mb-3"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <motion.h1 className="sm:text-4xl text-2xl md:text-7xl font-bold text-gray-900 md:mb-6 mb-3">
             Find A <span className="text-primary">Job</span> That{" "}
             <span className="text-primary">Matches</span> Your Passion
           </motion.h1>
@@ -108,12 +103,7 @@ export default function HeroSection({ jobs }) {
           </motion.div>
         </motion.div>
       </div>
-      <motion.div
-        className="w-full h-full object-cover flex absolute top-0 z-0 right-0"
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-      >
+      <motion.div className="w-full h-full object-cover flex absolute top-0 z-0 right-0">
         <img src={woman2} alt="Hero" className="w-full rounded-lg" />
       </motion.div>
     </section>
