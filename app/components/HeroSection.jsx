@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import Button from "./Button";
 import Input from "./Input";
 import SuggestionsList from "./SuggestionsList";
@@ -47,16 +48,36 @@ export default function HeroSection({ jobs }) {
   return (
     <section className="bg-white w-screen relative">
       <div className=" flex flex-col-reverse justify-center lg:items-start items-center gap-10 container mx-auto md:h-screen h-[50vh]">
-        <div className="lg:w-1/2 z-10 relative">
-          <h1 className="sm:text-4xl text-2xl md:text-7xl font-bold text-gray-900 md:mb-6 mb-3">
+        <motion.div
+          className="lg:w-1/2 z-10 relative"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.h1
+            className="sm:text-4xl text-2xl md:text-7xl font-bold text-gray-900 md:mb-6 mb-3"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             Find A <span className="text-primary">Job</span> That{" "}
             <span className="text-primary">Matches</span> Your Passion
-          </h1>
-          <p className="text-gray-600 md:text-base text-sm md:mb-6 mb-3">
+          </motion.h1>
+          <motion.p
+            className="text-gray-600 md:text-base text-sm md:mb-6 mb-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             Hand-picked opportunities to work from home, remotely, freelance,
             full-time, part-time, contract and internships.
-          </p>
-          <div className="flex relative">
+          </motion.p>
+          <motion.div
+            className="flex relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             <div className="relative w-full">
               <Input
                 inputstyle="background"
@@ -84,12 +105,17 @@ export default function HeroSection({ jobs }) {
             <Button size="lg" className="rounded-md absolute right-0">
               Search
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-      <div className="w-full h-full object-cover flex absolute top-0 z-0 right-0">
+      <motion.div
+        className="w-full h-full object-cover flex absolute top-0 z-0 right-0"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
         <img src={woman2} alt="Hero" className="w-full rounded-lg" />
-      </div>
+      </motion.div>
     </section>
   );
 }

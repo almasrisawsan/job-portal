@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { MapPin, Clock, DollarSign } from "lucide-react";
 import { useNavigate } from "react-router";
 import Button from "./Button";
@@ -9,7 +10,15 @@ export default function FeaturedJobs({ jobs, error, loading }) {
 
   return (
     <section className="bg-white py-10">
-      <h2 className="text-center text-xl font-semibold mb-8">Featured Jobs</h2>
+      <motion.h2
+        className="text-center text-xl font-semibold mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        Featured Jobs
+      </motion.h2>
       {error != "" && <h1 className="text-center">Some thing be wrong </h1>}
       {loading ? (
         // 🔹 Skeleton loader
@@ -43,8 +52,13 @@ export default function FeaturedJobs({ jobs, error, loading }) {
       ) : (
         <div className="container mx-auto flex flex-col gap-5 px-4">
           {jobs.map((job, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.2 }}
+              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
               className="bg-white shadow-sm rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition"
             >
               <div className="flex items-center gap-4">
@@ -92,7 +106,7 @@ export default function FeaturedJobs({ jobs, error, loading }) {
               >
                 View Details
               </Button>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
