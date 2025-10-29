@@ -74,8 +74,16 @@ const Job = ({ job }) => {
       </div>
 
       <div className="flex-shrink-0 mt-4 sm:mt-0">
-        <Link
+        {/* <Link
           to={`/job/${job.id}`}
+          className="bg-[#338573] text-white px-4 py-2 rounded hover:bg-[#2a6b5d] transition"
+        >
+          View Details
+        </Link> */}
+
+        {/* ashraf */}
+        <Link
+          to={`/job-details/${job.id}`}
           className="bg-[#338573] text-white px-4 py-2 rounded hover:bg-[#2a6b5d] transition"
         >
           View Details
