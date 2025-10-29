@@ -1,0 +1,17 @@
+React Project Folder Structure Guidelines
+
+Routes Management
+    - All routes are defined in the routes.ts file.
+    - When adding a new route, make sure to include it in this file.
+
+Pages and Components
+    - Each page should be created inside the routes folder.
+    - If a page requires custom UI or logic, create a dedicated component for it.
+    - If a component is shared across multiple pages, place it in the root components folder for better reusability.
+
+Layout Components
+    - The Navbar and Footer files are predefined—add or modify them only where specified.
+
+Routing Reference
+    - For more information on using path parameters and other routing features, refer to the official React Router documentation:
+🔗 https://reactrouter.com/
