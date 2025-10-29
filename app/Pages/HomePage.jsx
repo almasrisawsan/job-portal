@@ -29,7 +29,7 @@ export default function HomePage() {
   }, []);
   return (
     <div>
-      <HeroSection jobs={jobs} error={error} loading={loading} />
+      <HeroSection jobs={jobs} />
       <Categories />
       <FeaturedJobs jobs={jobs} error={error} loading={loading} />
     </div>

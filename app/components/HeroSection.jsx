@@ -39,7 +39,7 @@ export default function HeroSection({ jobs }) {
         setSuggestions(filtered);
       } else {
         setSuggestions([]);
-      } 
+      }
     }, [300]);
     return () => clearTimeout(timer);
   }, [searchInput]);
