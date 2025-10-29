@@ -30,6 +30,19 @@ const JobTable = ({ onView, onEdit, onDelete }: any) => {
       .then((data) => setJobs(data));
   }, []);
 
+ const handleDelete = (id) => {
+  const job = jobs.find((j) => j.id === id);
+
+  const confirmDelete = window.confirm(
+    `Are you sure you want to delete "${job.title}"?`
+  );
+
+  if (confirmDelete) {
+    setJobs((prev) => prev.filter((job) => job.id !== id));
+  }
+};
+
+
   return (
     <div className="overflow-x-auto rounded-3xl p-6">
       <div className="overflow-x-auto rounded-2xl border border-gray-200">
@@ -37,7 +50,7 @@ const JobTable = ({ onView, onEdit, onDelete }: any) => {
           <JobTableHeader />
           <tbody>
             {jobs.length > 0 ? (
-              jobs.map((job: any) => <JobTableRow key={job.id} job={job} />)
+              jobs.map((job: any) => <JobTableRow key={job.id} job={job} onDelete={handleDelete}/>)
             ) : (
               <tr>
                 <td className="text-center py-4 text-gray-500" colSpan={5}>
