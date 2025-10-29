@@ -23,7 +23,6 @@ export default function CreateJobPage() {
       setCreating(false);
     }
   };
-
   return (
     <div className="container mx-auto py-8">
       {error && (
@@ -32,7 +31,6 @@ export default function CreateJobPage() {
           <span>{error}</span>
         </div>
       )}
-
       {successJobId && (
         <div className="bg-teal-50 border border-teal-500 text-teal-700 px-6 py-4 rounded-lg mb-6 max-w-xl mx-auto mt-24">
           <h3 className="font-bold text-lg mb-2">Job Created Successfully!</h3>
@@ -57,7 +55,7 @@ export default function CreateJobPage() {
           </div>
         </div>
       )}
-
+      
       {!successJobId && (
         <JobForm
           onSubmit={handleSubmit}
