@@ -49,7 +49,7 @@ export default function JobsList() {
   const columns = ["Title", "Type", "Salary", "Location", "Action"];
 
   const handleEditSave = async (updatedJob) => {
-    const response = await UpdateJob(updatedJob.id, updatedJob);
+    await UpdateJob(updatedJob.id, updatedJob);
     setJobs((prev) =>
       prev.map((job) => (job.id === updatedJob.id ? updatedJob : job))
     );

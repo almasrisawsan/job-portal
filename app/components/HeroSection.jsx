@@ -5,7 +5,7 @@ import SuggestionsList from "./SuggestionsList";
 
 import woman2 from "../welcome/woman2.png";
 
-export default function HeroSection({ jobs, error, loading }) {
+export default function HeroSection({ jobs }) {
   const [suggestions, setSuggestions] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [active, setActive] = useState(false);
@@ -27,18 +27,21 @@ export default function HeroSection({ jobs, error, loading }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   useEffect(() => {
-    setActive(searchInput.trim() != "");
-    if (searchInput.trim().length > 0) {
-      const filtered = jobs.filter(
-        (job) =>
-          job.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-          job.company.toLowerCase().includes(searchInput.toLowerCase())
-      );
+    const timer = setTimeout(() => {
+      setActive(searchInput.trim() != "");
+      if (searchInput.trim().length > 0) {
+        const filtered = jobs.filter(
+          (job) =>
+            job.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+            job.company.toLowerCase().includes(searchInput.toLowerCase())
+        );
 
-      setSuggestions(filtered);
-    } else {
-      setSuggestions([]);
-    }
+        setSuggestions(filtered);
+      } else {
+        setSuggestions([]);
+      } 
+    }, [300]);
+    return () => clearTimeout(timer);
   }, [searchInput]);
 
   return (
