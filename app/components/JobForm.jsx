@@ -65,7 +65,6 @@ const JobForm = ({
         setLoadingCategories(false);
       }
     };
-
     fetchCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -117,7 +116,19 @@ const JobForm = ({
     // Clear errors and submit
     setErrors({});
     if (onSubmit) {
-      onSubmit(formData);
+      // Find the categoryId based on the selected category name
+      const selectedCategory = categories.find(
+        (cat) => cat.name === formData.category
+      );
+
+      // Add categoryId to form data
+      const submissionData = {
+        ...formData,
+        categoryId: selectedCategory ? selectedCategory.id : null,
+      };
+
+      console.log("Submission data with categoryId:", submissionData);
+      onSubmit(submissionData);
     }
   };
 
@@ -261,7 +272,6 @@ const JobForm = ({
             />
           </div>
         </div>
-
         {/* Location + Salary */}
         <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
           <div>
