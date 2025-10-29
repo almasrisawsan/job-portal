@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useParams } from "react-router";
 import Button from "../components/Button";
 import { GetJobsByid } from "../api/api";
@@ -74,59 +75,106 @@ const DetailsJob = () => {
   if (!job) return <div className="text-center py-10">No job found.</div>;
 
   return (
-    <div className="bg-gray-50 min-h-screen mt-15 py-10">
+    <motion.div
+      className="bg-gray-50 min-h-screen py-10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="container mx-auto px-4 md:px-10">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">
+        <motion.h1
+          className="text-2xl md:text-3xl font-bold text-gray-900 text-center"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           {job.title}
-        </h1>
+        </motion.h1>
 
-        <div className="mt-10 bg-white text-black rounded-2xl shadow-md p-6 md:p-10 space-y-8">
-          <div className="flex justify-center items-center">
+        <motion.div
+          className="mt-10 bg-white text-black rounded-2xl shadow-md p-6 md:p-10 space-y-8"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <motion.div
+            className="flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
             <div className="flex gap-2 sm:flex-nowrap justify-center items-center flex-wrap">
-              <Button className="rounded-md" variant="outline">
-                View Company
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button className="rounded-md" variant="outline">
+                  View Company
+                </Button>
+              </motion.div>
 
-              <Button className="rounded-md">Apply This Job</Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button className="rounded-md">Apply This Job</Button>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
             <h2 className="text-xl text-black font-semibold mb-3 pb-2">
               Job Description
             </h2>
             <p className="text-gray-700 leading-relaxed">{job.description}</p>
-          </div>
+          </motion.div>
 
           {job.requirements && job.requirements.length > 0 && (
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
               <h2 className="text-xl font-semibold mb-3 pb-2">Requirements</h2>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 {job.requirements.map((req, index) => (
-                  <li key={index}>{req}</li>
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                  >
+                    {req}
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           )}
 
           {job.tags && job.tags.length > 0 && (
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+            >
               <h2 className="text-xl font-semibold mb-3 pb-2">Tags</h2>
               <div className="flex flex-wrap gap-2">
                 {job.tags.map((tag, index) => (
-                  <span
+                  <motion.span
                     key={index}
                     className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 1 + index * 0.05 }}
+                    whileHover={{ scale: 1.1, backgroundColor: "#e5e7eb" }}
                   >
                     #{tag}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

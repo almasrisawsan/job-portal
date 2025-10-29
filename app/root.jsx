@@ -21,7 +21,7 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body className="overflow-x-hidden">
+      <body className="overflow-x-hidden pt-20">
         <Header />
         {children}
         <ScrollRestoration />
