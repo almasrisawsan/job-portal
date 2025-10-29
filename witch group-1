@@ -1,0 +1,204 @@
+[33mcommit 14bb587d31f8cfbc4614f05bef9a711f8cc93a7a[m[33m ([m[1;36mHEAD -> [m[1;32mgroup-1-job-list[m[33m, [m[1;31morigin/group-1[m[33m, [m[1;32mgroup-1[m[33m)[m
+Merge: abb92c3 b73b08c
+Author: Mai Elhajeen | مي الهجين <79872538+Mai-Elhajeen@users.noreply.github.com>
+Date:   Wed Oct 29 20:04:29 2025 +0200
+
+    Merge pull request #16 from almasrisawsan/Hussein-Mohammed
+    
+    Hussein mohammed
+
+[33mcommit b73b08c287a9138a94ba83bd24ff438a034f1ad0[m[33m ([m[1;31morigin/Hussein-Mohammed[m[33m)[m
+Merge: c8e95bc abb92c3
+Author: Mai Elhajeen | مي الهجين <79872538+Mai-Elhajeen@users.noreply.github.com>
+Date:   Wed Oct 29 20:04:11 2025 +0200
+
+    Merge branch 'group-1' into Hussein-Mohammed
+
+[33mcommit abb92c3ba1c8bd79a4e6d59d3eb1253e3c5afc62[m
+Merge: 7ba236b d171963
+Author: Mohammed Yousef <69032001+m7md-Y-3mra@users.noreply.github.com>
+Date:   Wed Oct 29 19:47:41 2025 +0200
+
+    Merge pull request #32 from almasrisawsan/group-1-create-job-new
+    
+    creating create job page and the jobForm component and installing axi…
+
+[33mcommit 7ba236bb79b797a7e938fa67860608548ca7b125[m
+Author: Mai-Elhajeen <maielhajeen2001>
+Date:   Wed Oct 29 16:22:33 2025 +0200
+
+    compleated edit function
+
+[33mcommit d171963a4b615d7428220fa276cfcec64186f7d3[m[33m ([m[1;31morigin/group-1-create-job-new[m[33m)[m
+Author: AbdullahLaham <abed26194@gmail.com>
+Date:   Wed Oct 29 14:39:33 2025 +0200
+
+    creating create job page and the jobForm component and installing axios library
+
+[33mcommit 8c9a0255c1933c7895f98ddf66a2ed80cdab61ba[m
+Author: Omar Zuhri <omar.z.zuhri@gmail.com>
+Date:   Tue Oct 28 13:59:14 2025 +0200
+
+    Adding FeaturedJobs section in home page.
+
+[33mcommit 183883e180e6fe38ecaa0135c94dcf820a76b2b8[m
+Author: Mai-Elhajeen <maielhajeen2001>
+Date:   Tue Oct 28 01:40:22 2025 +0200
+
+    coding job list page and function that inside it like view, delete and prepare to make update function
+
+[33mcommit b486d26d622d3730b8ff75c1a3442d8508462f67[m
+Merge: d9006da 7a6425a
+Author: Mohammed Yousef <69032001+m7md-Y-3mra@users.noreply.github.com>
+Date:   Fri Oct 24 21:28:21 2025 +0300
+
+    Merge pull request #19 from almasrisawsan/group-1-job-details
+    
+    feat: Add job details page
+
+[33mcommit 7a6425aeac46e368f0900ad0f05a1f535498eabb[m[33m ([m[1;31morigin/group-1-job-details[m[33m)[m
+Author: m7md-Y-3mra <kingmoha2002@gmail.com>
+Date:   Fri Oct 24 21:23:36 2025 +0300
+
+    feat: Add job details page
+
+[33mcommit d9006da0ce5a234c27be800e1af7dcdf3cd90927[m
+Author: HusseinMAbushawish <hussen2001108@gmail.com>
+Date:   Thu Oct 23 21:54:27 2025 +0300
+
+    Fix: update Header and Footer styles
+
+[33mcommit df7e152dae6f37460e7eb51d332b772968257951[m
+Author: HusseinMAbushawish <hussen2001108@gmail.com>
+Date:   Thu Oct 23 21:46:02 2025 +0300
+
+    Add Header and Footer components
+
+[33mcommit c8e95bcecb50792b4da4e2422193cb5f2ce1324a[m
+Merge: 04f0048 8fe0903
+Author: HusseinMAbushawish <hussen2001108@gmail.com>
+Date:   Thu Oct 23 17:22:26 2025 +0300
+
+    Add Header and Footer Section component
+
+[33mcommit 37f13a25a9a170c1a467272175ed8b9a77abe516[m
+Author: m7md-Y-3mra <kingmoha2002@gmail.com>
+Date:   Thu Oct 23 16:58:42 2025 +0300
+
+    feat: Enhance CSS variables
+
+[33mcommit 8fe0903c0ec02f0e5140542840aab1fa692558d0[m
+Author: m7md-Y-3mra <kingmoha2002@gmail.com>
+Date:   Thu Oct 23 16:35:25 2025 +0300
+
+    refactor: remove the src folder
+
+[33mcommit 7c8d88f2bae411826c3a237256582893892c8780[m
+Author: m7md-Y-3mra <kingmoha2002@gmail.com>
+Date:   Thu Oct 23 15:43:44 2025 +0300
+
+    feat: Refactor folder structure
+
+[33mcommit 04f0048aaf1743cba7435931071f6f90bb2a60b2[m
+Merge: 24d2859 d6257c5
+Author: Noor Al-Afifi <124470858+noorafifi889@users.noreply.github.com>
+Date:   Thu Oct 23 14:13:19 2025 +0300
+
+    Merge pull request #11 from almasrisawsan/form
+    
+    Add job form component
+
+[33mcommit d6257c56471d49ddf9bc156329d86968b114c8dd[m
+Author: noorafifi889 <noorelafifi889@gmail.com>
+Date:   Thu Oct 23 14:04:01 2025 +0300
+
+    Add job form component with responsive design
+
+[33mcommit 875a5a8f84fb4eeb18f8d843cd64c7fe5e9c2d4e[m
+Author: m7md-Y-3mra <kingmoha2002@gmail.com>
+Date:   Thu Oct 23 13:07:39 2025 +0300
+
+    Remove Welcome component and associated assets; update Home component to display Job Portal titlef
+
+[33mcommit 24d2859ee8fa0477895803f70fbdf877003fddd4[m
+Merge: 1427085 ced04cb
+Author: OsssGhoul <109948537+Osama-Alghoul@users.noreply.github.com>
+Date:   Thu Oct 23 12:49:13 2025 +0300
+
+    Merge pull request #4 from almasrisawsan/Osama
+    
+    Osama
+
+[33mcommit ced04cbc14f9895b43c43c7dccfba3884da0a577[m
+Merge: f947d11 1e0b814
+Author: OsssGhoul <osamalghoul2@gmail.com>
+Date:   Thu Oct 23 12:48:12 2025 +0300
+
+    Merge branch 'group-3' into Osama
+
+[33mcommit 1e0b81475b78004d8b122945984833b4fa9cbb31[m
+Author: Mostafa-Aljazar <mostafaibrahim20032020@gmail.com>
+Date:   Thu Oct 23 12:37:24 2025 +0300
+
+    setup the project
+
+[33mcommit f947d1140effcd4c3156d9af26c2f5fb06dd50a7[m
+Author: OsssGhoul <osamalghoul2@gmail.com>
+Date:   Thu Oct 23 12:34:21 2025 +0300
+
+    Feat: navbar + primary color
+
+[33mcommit edf6033571bdd3a3755bee189d543b06bcac67e7[m
+Author: malik <ma037646@gmail.com>
+Date:   Thu Oct 23 12:28:57 2025 +0300
+
+    initial commit
+
+[33mcommit 1d2c2fe29b68840d471b7fe2ea0fd0c835b851c1[m
+Author: malik <ma037646@gmail.com>
+Date:   Thu Oct 23 12:17:42 2025 +0300
+
+    initial commit
+
+[33mcommit 6c685dc03decc175ed429ec989a8ae51afebe723[m
+Author: malik <ma037646@gmail.com>
+Date:   Thu Oct 23 12:11:36 2025 +0300
+
+    initial commit
+
+[33mcommit 142708526a7a08c4ed87d13dcf8fe928e3a7faad[m
+Author: almasrisawsan <sawsan.msri@gmail.com>
+Date:   Thu Oct 23 07:24:32 2025 +0000
+
+    Update readme
+
+[33mcommit 0399a1d16ffb2b357ece3132815e2716b8816081[m
+Merge: ea8cfa2 a7dec9e
+Author: almasrisawsan <sawsan.msri@gmail.com>
+Date:   Thu Oct 23 07:17:57 2025 +0000
+
+    Merge branch 'main' of https://github.com/almasrisawsan/job-portal
+
+[33mcommit ea8cfa2df218b6423a6c3e4e09dd1699b971de0f[m
+Author: almasrisawsan <sawsan.msri@gmail.com>
+Date:   Thu Oct 23 07:17:21 2025 +0000
+
+    Update readme
+
+[33mcommit a7dec9ebe7852768a063737b93858f6b1b56547c[m
+Author: almasrisawsan <sawsan.msri@gmail.com>
+Date:   Thu Oct 23 00:05:16 2025 +0300
+
+    Update README.md
+
+[33mcommit 2981df57a8690d7f89deaba2fc98465219f346d1[m
+Author: almasrisawsan <sawsan.msri@gmail.com>
+Date:   Wed Oct 22 21:04:39 2025 +0000
+
+    Project seed
+
+[33mcommit d179a8c6085ecc231caae08f5eaf4ff23785f377[m
+Author: almasrisawsan <sawsan.msri@gmail.com>
+Date:   Thu Oct 23 00:00:28 2025 +0300
+
+    Initial commit
