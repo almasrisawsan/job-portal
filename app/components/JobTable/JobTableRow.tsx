@@ -17,7 +17,7 @@ const JobTableRow: React.FC<JobTableRowProps> = ({ job, onDelete }) => {
   const navigate = useNavigate();
 
   const handleView = () => {
-    navigate(`/job/${job.id}`); // 👈 يروح على صفحة التفاصيل
+    navigate(`/job-details/${job.id}`); // 👈 يروح على صفحة التفاصيل
   };
 
   return (
