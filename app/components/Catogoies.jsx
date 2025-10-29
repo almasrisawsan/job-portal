@@ -6,23 +6,26 @@ import { GetCatogries } from "../api/api";
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error,setError]=useState("")
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    let ignor = false;
     const fetchCategories = async () => {
       try {
         const response = await GetCatogries();
         setCategories(response.data);
       } catch (error) {
-        setError(error)
-        console.error("Error0 fetching categories:", error);
+        setError(error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCategories();
+    if (!ignor) fetchCategories();
+    return () => {
+      ignor = true;
+    };
   }, []);
 
   return (
@@ -30,8 +33,7 @@ export default function Categories() {
       <h2 className="text-center text-xl mb-8 text-black font-bold">
         Popular Categories
       </h2>
-    {error!="" &&
-    <h1 className="text-center">Some thing be wrong </h1>}
+      {error != "" && <h1 className="text-center">Some thing be wrong </h1>}
       {loading ? (
         <div className="mx-auto grid grid-cols-2 sm:grid-cols-3 container md:grid-cols-4 lg:grid-cols-5 gap-6">
           {Array.from({ length: 8 }).map((_, index) => (

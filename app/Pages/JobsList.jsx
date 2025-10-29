@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { DeleteJobsByid, GetJobsByCatogriesId } from "../api/api";
+import { DeleteJobsByid, GetJobsByCatogriesId, UpdateJob } from "../api/api";
 import { AiOutlineEye, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 export default function JobsList() {
@@ -9,23 +9,25 @@ export default function JobsList() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingJob, setEditingJob] = useState(null);
-    const [error,setError]=useState("")
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    let ignot = false;
     const fetchJobs = async () => {
       try {
         const response = await GetJobsByCatogriesId(id);
-        console.log("Fetched Jobs:", response); // تأكد من البيانات
-        // إذا response هو كائن يحتوي على data
-        setJobs(response.data || response); 
+        setJobs(response.data || response);
       } catch (error) {
-        setError(error)
+        setError(error);
         console.error("Error fetching jobs:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchJobs();
+    if (!ignot) fetchJobs();
+    return () => {
+      ignot = true;
+    };
   }, [id]);
 
   const DeleteJob = async (jobid) => {
@@ -39,15 +41,15 @@ export default function JobsList() {
       alert("Job deleted successfully!");
       setJobs((prev) => prev.filter((job) => job.id !== jobid));
     } catch (error) {
-        setError(error)
-      console.error("Error deleting job:", error);
+      setError(error);
       alert("Failed to delete job. Please try again.");
     }
   };
 
   const columns = ["Title", "Type", "Salary", "Location", "Action"];
 
-  const handleEditSave = (updatedJob) => {
+  const handleEditSave = async (updatedJob) => {
+    const response = await UpdateJob(updatedJob.id, updatedJob);
     setJobs((prev) =>
       prev.map((job) => (job.id === updatedJob.id ? updatedJob : job))
     );
@@ -65,8 +67,7 @@ export default function JobsList() {
           ← Back
         </button>
       </div>
-{error!=""&&
-    <h1 className="text-center">Some thing be wrong </h1>}
+      {error != "" && <h1 className="text-center">Some thing be wrong </h1>}
       {loading ? (
         <div className="bg-white rounded-lg shadow overflow-hidden animate-pulse">
           <div className="bg-gray-50 border-b h-12"></div>
@@ -111,11 +112,18 @@ export default function JobsList() {
             <tbody className="divide-y divide-gray-200">
               {jobs.map((job) => (
                 <tr key={job.id} className="hover:bg-gray-50">
-                  {[]}
-                  <td className="px-6 py-4 text-sm text-gray-900">{job.title}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{job.type}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{job.salary}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{job.location}</td>
+                  <td className="px-6 py-4 text-sm text-gray-900">
+                    {job.title}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">
+                    {job.type}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">
+                    {job.salary}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">
+                    {job.location}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex gap-3 justify-end">
                       <AiOutlineEye
@@ -142,54 +150,49 @@ export default function JobsList() {
         </div>
       )}
 
-      {/* Modal Edit Job */}
+      {editingJob && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="absolute inset-0 bg-black opacity-40"
+            onClick={() => setEditingJob(null)}
+          ></div>
 
-{editingJob && (
-  <div className="fixed inset-0 flex items-center justify-center z-50">
-    
-    <div
-      className="absolute inset-0 bg-black opacity-40"
-      onClick={() => setEditingJob(null)} 
-    ></div>
-
-    
-    <div className="bg-white rounded-lg p-6 w-full max-w-md relative z-10 shadow-lg">
-      <h3 className="text-xl font-bold mb-4">Edit Job</h3>
-      <div className="space-y-3">
-        {["title", "type", "salary", "location"].map((field) => (
-          <div key={field}>
-            <label className="block text-sm font-medium text-gray-700 capitalize">
-              {field}
-            </label>
-            <input
-              type="text"
-              value={editingJob[field]}
-              onChange={(e) =>
-                setEditingJob({ ...editingJob, [field]: e.target.value })
-              }
-              className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
-            />
+          <div className="bg-white rounded-lg p-6 w-full max-w-md relative z-10 shadow-lg">
+            <h3 className="text-xl font-bold mb-4">Edit Job</h3>
+            <div className="space-y-3">
+              {["title", "type", "salary", "location"].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-medium text-gray-700 capitalize">
+                    {field}
+                  </label>
+                  <input
+                    type="text"
+                    value={editingJob[field]}
+                    onChange={(e) =>
+                      setEditingJob({ ...editingJob, [field]: e.target.value })
+                    }
+                    className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-end gap-3 mt-5">
+              <button
+                onClick={() => setEditingJob(null)}
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleEditSave(editingJob)}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
+              >
+                Save
+              </button>
+            </div>
           </div>
-        ))}
-      </div>
-      <div className="flex justify-end gap-3 mt-5">
-        <button
-          onClick={() => setEditingJob(null)}
-          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => handleEditSave(editingJob)}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
-        >
-          Save
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+        </div>
+      )}
     </div>
   );
 }
