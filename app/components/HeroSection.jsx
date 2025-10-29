@@ -1,77 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import SuggestionsList from "./SuggestionsList";
-import { useSearch } from "../hooks/useSearch";
-import { GetJobs } from "../api/api";
 
-// import womman from "../welcome/womman.png";
 import woman2 from "../welcome/woman2.png";
 
-export default function HeroSection() {
-  const [searchInput, setSearchInput] = useState("");
+export default function HeroSection({ jobs, error, loading }) {
   const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [allJobs, setAllJobs] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const { updateSearchTerm, debouncedSearchTerm } = useSearch();
+  const [searchInput, setSearchInput] = useState("");
+  const [active, setActive] = useState(false);
+  const inputRef = useRef(null);
+  const divsearch = useRef(null);
 
   useEffect(() => {
-    const fetchAllJobs = async () => {
-      try {
-        setLoading(true);
-        const response = await GetJobs();
-        setAllJobs(response.data);
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-      } finally {
-        setLoading(false);
+    const handleClickOutside = (e) => {
+      if (
+        divsearch.current &&
+        inputRef.current &&
+        !divsearch.current.contains(e.target) &&
+        !inputRef.current.contains(e.target)
+      ) {
+        setActive(false);
       }
     };
-    fetchAllJobs();
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
   useEffect(() => {
+    setActive(searchInput.trim() != "");
     if (searchInput.trim().length > 0) {
-      const filtered = allJobs.filter(
+      const filtered = jobs.filter(
         (job) =>
           job.title.toLowerCase().includes(searchInput.toLowerCase()) ||
           job.company.toLowerCase().includes(searchInput.toLowerCase())
       );
 
       setSuggestions(filtered);
-      setShowSuggestions(true);
     } else {
       setSuggestions([]);
-      setShowSuggestions(false);
     }
-  }, [searchInput, allJobs]);
-
-  useEffect(() => {
-    updateSearchTerm(debouncedSearchTerm);
-  }, [debouncedSearchTerm, updateSearchTerm]);
-
-  const handleSearch = () => {
-    updateSearchTerm(searchInput);
-    setShowSuggestions(false);
-  };
-
-  const handleSuggestionSelect = (job) => {
-    setSearchInput(job.title);
-    setShowSuggestions(false);
-    updateSearchTerm(job.title);
-  };
-
-  const handleInputChange = (e) => {
-    setSearchInput(e.target.value);
-  };
-
-  const handleInputFocus = () => {
-    if (suggestions.length > 0) {
-      setShowSuggestions(true);
-    }
-  };
+  }, [searchInput]);
 
   return (
     <section className="bg-white w-screen relative">
@@ -90,25 +58,27 @@ export default function HeroSection() {
               <Input
                 inputstyle="background"
                 type="text"
+                value={searchInput}
                 className="rounded-l-md w-full"
                 placeholder="Search by job title..."
-                value={searchInput}
-                onChange={handleInputChange}
-                onFocus={handleInputFocus}
+                onChange={(e) => {
+                  setSearchInput(e.target.value);
+                }}
+                ref={inputRef}
+                onFocus={(e) => {
+                  setActive(searchInput.trim() != "");
+                  setSearchInput(e.target.value);
+                }}
               />
-              <SuggestionsList
-                suggestions={suggestions}
-                isVisible={showSuggestions}
-                onSelect={handleSuggestionSelect}
-                onClose={() => setShowSuggestions(false)}
-                searchTerm={searchInput}
-              />
+              {active && (
+                <SuggestionsList
+                  ref={divsearch}
+                  suggestions={suggestions}
+                  searchTerm={searchInput}
+                />
+              )}
             </div>
-            <Button
-              size="lg"
-              className="rounded-md absolute right-0"
-              onClick={handleSearch}
-            >
+            <Button size="lg" className="rounded-md absolute right-0">
               Search
             </Button>
           </div>

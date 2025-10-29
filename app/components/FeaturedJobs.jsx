@@ -4,27 +4,8 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import { GetJobs } from "../api/api";
 
-export default function FeaturedJobs() {
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
+export default function FeaturedJobs({ jobs, error, loading }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await GetJobs();
-        setJobs(response.data);
-      } catch (error) {
-        setError(error);
-        console.error("Error fetching jobs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchJobs();
-  }, []);
 
   return (
     <section className="bg-white py-10">

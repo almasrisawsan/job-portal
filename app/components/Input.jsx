@@ -1,19 +1,23 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-function Input({
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  icon: Icon,
-  iconsize,
-  iconPosition = "left",
-  inputstyle = "border",
-  className,
-  iconClassName,
-  name,
-  onFocus,
-}) {
+const Input = forwardRef(function Input(
+  {
+    type = "text",
+    placeholder,
+    value,
+    onChange,
+    icon: Icon,
+    iconsize,
+    iconPosition = "left",
+    inputstyle = "border",
+    className,
+    iconClassName,
+    name,
+    onFocus,
+    onBlur,
+  },
+  ref
+) {
   const border = `border border-gray-300 rounded  px-4`;
   const bg = `bg-white rounded  px-4`;
   const borderBottom = `border-b border-gray-300 rounded-none`;
@@ -41,6 +45,8 @@ function Input({
         )}
 
         <input
+          ref={ref}
+          onBlur={onBlur}
           onFocus={onFocus}
           name={name}
           type={type}
@@ -60,6 +66,6 @@ function Input({
       </div>
     </div>
   );
-}
+});
 
 export default Input;
