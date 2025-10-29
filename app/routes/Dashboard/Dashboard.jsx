@@ -25,7 +25,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div >
+    <div>
       <h1 className="text-3xl text-center font-medium m-6">Jobs List</h1>
       <div className="bg-white p-6 flex justify-between">
         <table className="w-dvw border p-4 rounded-l-4xl rounded-r-4xl">
