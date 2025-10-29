@@ -124,8 +124,8 @@ export default function JobsList() {
                   <td className="px-6 py-4 text-sm text-gray-900">
                     {job.location}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-3 justify-end">
+                  <td className="px-6 py-4 flex ">
+                    <div className="flex gap-3 ">
                       <AiOutlineEye
                         size={20}
                         className="text-blue-600 cursor-pointer hover:text-blue-800"
