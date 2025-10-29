@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { MapPin, Clock, DollarSign } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, Clock, DollarSign, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import { GetJobs } from "../api/api";
 
 export default function FeaturedJobs({ jobs, error, loading }) {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 5;
+
+  // Calculate pagination
+  const totalPages = Math.ceil(jobs.length / jobsPerPage);
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
+
+  // Reset to page 1 when jobs change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [jobs]);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <section className="bg-white py-10">
@@ -50,17 +67,24 @@ export default function FeaturedJobs({ jobs, error, loading }) {
           ))}
         </div>
       ) : (
-        <div className="container mx-auto flex flex-col gap-5 px-4">
-          {jobs.map((job, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.2 }}
-              whileHover={{ scale: 1.02, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
-              className="bg-white shadow-sm rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition"
-            >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="container mx-auto flex flex-col gap-5 px-4"
+          >
+            {currentJobs.map((job, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
+                whileHover={{ scale: 1.02, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
+                className="bg-white shadow-sm rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:shadow-md transition"
+              >
               <div className="flex items-center gap-4">
                 {job.companyUrl ? (
                   <img
@@ -108,6 +132,46 @@ export default function FeaturedJobs({ jobs, error, loading }) {
               </Button>
             </motion.div>
           ))}
+          </motion.div>
+        </AnimatePresence>
+      )}
+
+      {/* Pagination Controls */}
+      {!loading && jobs.length > jobsPerPage && (
+        <div className="container mx-auto px-4 mt-8 flex justify-center items-center gap-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="p-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            aria-label="Previous page"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          <div className="flex gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+              <button
+                key={pageNum}
+                onClick={() => handlePageChange(pageNum)}
+                className={`px-4 py-2 rounded-md transition ${
+                  currentPage === pageNum
+                    ? "bg-primary text-white"
+                    : "border border-gray-300 hover:bg-gray-100"
+                }`}
+              >
+                {pageNum}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="p-2 rounded-md border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            aria-label="Next page"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       )}
     </section>
