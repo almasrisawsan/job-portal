@@ -8,6 +8,7 @@ interface JobTableRowProps {
     title: string;
     type: string;
     postedDate?: string;
+    createdAt: string;
     deadline?: string;
   };
   onDelete: (id: number | string) => void;
