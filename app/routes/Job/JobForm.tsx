@@ -84,6 +84,7 @@ const JobForm = () => {
                   Company Name
                 </h2>
                 <input
+                  required
                   type="text"
                   name="companyName"
                   value={formData.companyName}
@@ -98,6 +99,7 @@ const JobForm = () => {
                   Company Website
                 </h2>
                 <input
+                  required
                   type="text"
                   name="companyWebsite"
                   value={formData.companyWebsite}
@@ -113,6 +115,7 @@ const JobForm = () => {
                 Job Title
               </h2>
               <input
+                required
                 type="text"
                 name="jobTitle"
                 value={formData.jobTitle}
@@ -162,6 +165,7 @@ const JobForm = () => {
                   Job Location
                 </h2>
                 <input
+                  required
                   type="text"
                   name="jobLocation"
                   value={formData.jobLocation}
