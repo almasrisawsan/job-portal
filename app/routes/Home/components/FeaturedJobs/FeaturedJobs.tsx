@@ -73,7 +73,7 @@ const FeaturedJobs = () => {
                   </CardContent>
                 </div>
                 <Link
-                  to={`/jobs/${job.id}`}
+                  to={`/job/${job.id}`}
                   className="bg-[#338573] hover:bg-[#52998a] text-white rounded-xl px-6 py-2 w-full sm:w-auto mt-3 sm:mt-0"
                 >
                   View Details
