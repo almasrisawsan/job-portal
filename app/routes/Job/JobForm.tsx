@@ -16,6 +16,27 @@ const JobForm = () => {
     jobDescription: "",
   });
 
+  const [errors, setErrors] = useState({
+    companyName: "",
+    jobTitle: "",
+    jobLocation: "",
+    jobDescription: "",
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      companyName: formData.companyName ? "" : "Company name is required",
+      jobTitle: formData.jobTitle ? "" : "Job title is required",
+      jobLocation: formData.jobLocation ? "" : "Job location is required",
+      jobDescription: formData.jobDescription
+        ? ""
+        : "Job description is required",
+    };
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every((err) => err === "");
+  };
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -24,10 +45,19 @@ const JobForm = () => {
       ...prev,
       [name]: value,
     }));
+
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      console.log("Please fill in all required fields.");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -44,7 +74,6 @@ const JobForm = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("Job created successfully:", result);
-        // Reset form
         setFormData({
           companyName: "",
           companyWebsite: "",
@@ -84,14 +113,22 @@ const JobForm = () => {
                   Company Name
                 </h2>
                 <input
-                  required
                   type="text"
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
                   placeholder="Name"
-                  className="w-full px-3 py-2 text-sm border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className={`w-full px-3 py-2 text-sm border text-gray-800 rounded focus:outline-none focus:ring-1 ${
+                    errors.companyName
+                      ? "border-red-500 focus:ring-red-400"
+                      : "border-gray-300 focus:ring-blue-500"
+                  }`}
                 />
+                {errors.companyName && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.companyName}
+                  </p>
+                )}
               </div>
 
               <div className="flex-1">
@@ -99,7 +136,6 @@ const JobForm = () => {
                   Company Website
                 </h2>
                 <input
-                  required
                   type="text"
                   name="companyWebsite"
                   value={formData.companyWebsite}
@@ -115,14 +151,20 @@ const JobForm = () => {
                 Job Title
               </h2>
               <input
-                required
                 type="text"
                 name="jobTitle"
                 value={formData.jobTitle}
                 onChange={handleChange}
                 placeholder="Title"
-                className="w-full px-3 py-2 text-sm border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className={`w-full px-3 py-2 text-sm border text-gray-800 rounded focus:outline-none focus:ring-1 ${
+                  errors.jobTitle
+                    ? "border-red-500 focus:ring-red-400"
+                    : "border-gray-300 focus:ring-blue-500"
+                }`}
               />
+              {errors.jobTitle && (
+                <p className="text-red-500 text-xs mt-1">{errors.jobTitle}</p>
+              )}
             </div>
 
             <div className="flex flex-col md:flex-row gap-4">
@@ -165,14 +207,22 @@ const JobForm = () => {
                   Job Location
                 </h2>
                 <input
-                  required
                   type="text"
                   name="jobLocation"
                   value={formData.jobLocation}
                   onChange={handleChange}
                   placeholder="Location"
-                  className="w-full px-3 py-2 text-gray-800 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className={`w-full px-3 py-2 text-gray-800 text-sm border rounded focus:outline-none focus:ring-1 ${
+                    errors.jobLocation
+                      ? "border-red-500 focus:ring-red-400"
+                      : "border-gray-300 focus:ring-blue-500"
+                  }`}
                 />
+                {errors.jobLocation && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.jobLocation}
+                  </p>
+                )}
               </div>
 
               <div className="flex-1">
@@ -231,8 +281,17 @@ const JobForm = () => {
                 value={formData.jobDescription}
                 onChange={handleChange}
                 placeholder="Job Description"
-                className="w-full h-[300px] px-3 text-gray-800 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className={`w-full h-[300px] px-3 text-gray-800 py-2 text-sm border rounded focus:outline-none focus:ring-1 ${
+                  errors.jobDescription
+                    ? "border-red-500 focus:ring-red-400"
+                    : "border-gray-300 focus:ring-blue-500"
+                }`}
               ></textarea>
+              {errors.jobDescription && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.jobDescription}
+                </p>
+              )}
             </div>
 
             <div className="flex justify-end pt-4 mt-[20px]">
