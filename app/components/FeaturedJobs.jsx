@@ -20,9 +20,6 @@ export default function FeaturedJobs({ jobs, error, loading }) {
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
 
-  // useEffect(() => {
-  //   setCurrentPage(1);
-  // }, [jobs]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -150,22 +147,65 @@ export default function FeaturedJobs({ jobs, error, loading }) {
           </button>
 
           <div className="flex gap-1">
-            {[...Array(totalPages)].map((_, i) => {
-              const pageNum = i + 1;
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => handlePageChange(pageNum)}
-                  className={`px-4 py-2 rounded-md transition ${
-                    currentPage === pageNum
-                      ? "bg-primary text-white"
-                      : "border border-gray-300 hover:bg-gray-100"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
+            {(() => {
+              const maxPagesToShow = 5;
+              let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+              let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+              if (endPage - startPage + 1 < maxPagesToShow) {
+                startPage = Math.max(1, endPage - maxPagesToShow + 1);
+              }
+
+              const pages = [];
+
+              if (startPage > 1) {
+                pages.push(
+                  <button
+                    key={1}
+                    onClick={() => handlePageChange(1)}
+                    className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition"
+                  >
+                    1
+                  </button>
+                );
+                if (startPage > 2) {
+                  pages.push(<span key="dots1" className="px-2 py-2">...</span>);
+                }
+              }
+
+              for (let i = startPage; i <= endPage; i++) {
+                pages.push(
+                  <button
+                    key={i}
+                    onClick={() => handlePageChange(i)}
+                    className={`px-4 py-2 rounded-md transition ${
+                      currentPage === i
+                        ? "bg-primary text-white"
+                        : "border border-gray-300 hover:bg-gray-100"
+                    }`}
+                  >
+                    {i}
+                  </button>
+                );
+              }
+
+              if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                  pages.push(<span key="dots2" className="px-2 py-2">...</span>);
+                }
+                pages.push(
+                  <button
+                    key={totalPages}
+                    onClick={() => handlePageChange(totalPages)}
+                    className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition"
+                  >
+                    {totalPages}
+                  </button>
+                );
+              }
+
+              return pages;
+            })()}
           </div>
 
           <button
