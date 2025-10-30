@@ -7,7 +7,7 @@ export default function HeroSection() {
       <img
         src={ImageHeroSection}
         alt="hero banner"
-        className="absolute inset-0 w-full h-full opacity-50 md:opacity-100 object-cover"
+        className="absolute inset-0 w-full h-full opacity-50 md:opacity-100 object-contain"
       />
 
       <div className="z-10 relative px-6 md:px-12 pt-5 md:pt-20 max-w-[300px] md:max-w-lg lg:max-w-2xl text-left">
