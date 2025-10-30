@@ -26,6 +26,7 @@ const AllCats = () => {
 
         const mapped = mapCategoriesToCardItems(Array.isArray(data) ? data : []);
         const top10 = mapped.slice(0, 11); 
+
         if (!ignore) {
           setAPICats(top10);
           setCats(data)
