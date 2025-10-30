@@ -13,6 +13,7 @@ export default function CreateJobPage() {
   const [salaryRange, setSalaryRange] = useState("");
   const [featured, setFeatured] = useState("Yes");
   const [jobDescription, setJobDescription] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,9 +32,11 @@ export default function CreateJobPage() {
 
     console.log("Posting job data:", jobData);
 
-    const res = await axios.post("https://68f8f8e8deff18f212b83fba.mockapi.io/jobs",jobData);
+    const res = await axios.post(
+      "https://68f8f8e8deff18f212b83fba.mockapi.io/jobs",
+      jobData
+    );
     console.log("API Response:", res.data);
-
 
     const result = res.data;
 
@@ -50,11 +53,9 @@ export default function CreateJobPage() {
       setSalaryRange("");
       setFeatured("Yes");
       setJobDescription("");
-    }
-    else {
+    } else {
       alert("Failed to post job. Please try again.");
     }
-
   };
 
   return (
