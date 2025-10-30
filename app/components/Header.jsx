@@ -16,7 +16,9 @@ export default function Header() {
         </Link>
 
         <motion.div className="flex gap-2 items-center">
-          <h2 className="text-primary text-sm font-medium">Dashboard</h2>
+          <Link to="/">
+            <h2 className="text-primary text-sm font-medium">Dashboard</h2>
+          </Link>
 
           <motion.a
             href={"/jobs/new"}
