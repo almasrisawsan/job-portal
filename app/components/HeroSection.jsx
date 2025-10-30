@@ -27,6 +27,7 @@ export default function HeroSection({ jobs }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setActive(searchInput.trim() != "");

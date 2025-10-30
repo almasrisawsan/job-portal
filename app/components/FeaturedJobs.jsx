@@ -150,8 +150,9 @@ export default function FeaturedJobs({ jobs, error, loading }) {
           </button>
 
           <div className="flex gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-              (pageNum) => (
+            {[...Array(totalPages)].map((_, i) => {
+              const pageNum = i + 1;
+              return (
                 <button
                   key={pageNum}
                   onClick={() => handlePageChange(pageNum)}
@@ -163,8 +164,8 @@ export default function FeaturedJobs({ jobs, error, loading }) {
                 >
                   {pageNum}
                 </button>
-              )
-            )}
+              );
+            })}
           </div>
 
           <button

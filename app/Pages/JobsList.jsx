@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useParams, useNavigate, useLocation } from "react-router";
 import { DeleteJobsByid, GetJobsByCatogriesId, UpdateJob } from "../api/api";
 import { AiOutlineEye, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
@@ -8,8 +8,8 @@ export default function JobsList() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [jobs, setJobs] = useState([]);
   const categoryName = location.state?.categoryName || `Category #${id}`;
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingJob, setEditingJob] = useState(null);
   const [error, setError] = useState("");
@@ -139,8 +139,8 @@ export default function JobsList() {
                 hidden: { opacity: 0 },
                 visible: {
                   opacity: 1,
-                  transition: { staggerChildren: 0.05 }
-                }
+                  transition: { staggerChildren: 0.05 },
+                },
               }}
             >
               {jobs.map((job) => (
@@ -149,7 +149,7 @@ export default function JobsList() {
                   className="hover:bg-gray-50"
                   variants={{
                     hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 }
+                    visible: { opacity: 1, x: 0 },
                   }}
                   whileHover={{ backgroundColor: "#f9fafb" }}
                 >
@@ -190,67 +190,71 @@ export default function JobsList() {
           </table>
         </motion.div>
       )}
-
-      {editingJob && (
-        <motion.div
-          className="fixed inset-0 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
+      <AnimatePresence mode="wait">
+        {editingJob && (
           <motion.div
-            className="absolute inset-0 bg-black opacity-40"
-            onClick={() => setEditingJob(null)}
+            className="fixed inset-0 flex items-center justify-center z-50"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-          ></motion.div>
-
-          <motion.div
-            className="bg-white rounded-lg p-6 w-full max-w-md relative z-10 shadow-lg"
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: "spring", duration: 0.5 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <h3 className="text-xl font-bold mb-4">Edit Job</h3>
-            <div className="space-y-3">
-              {["title", "type", "salary", "location"].map((field) => (
-                <div key={field}>
-                  <label className="block text-sm font-medium text-gray-700 capitalize">
-                    {field}
-                  </label>
-                  <input
-                    type="text"
-                    value={editingJob[field]}
-                    onChange={(e) =>
-                      setEditingJob({ ...editingJob, [field]: e.target.value })
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-end gap-3 mt-5">
-              <motion.button
-                onClick={() => setEditingJob(null)}
-                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Cancel
-              </motion.button>
-              <motion.button
-                onClick={() => handleEditSave(editingJob)}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Save
-              </motion.button>
-            </div>
+            <motion.div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setEditingJob(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            ></motion.div>
+
+            <motion.div
+              className="bg-white rounded-lg p-6 w-full max-w-md relative z-10 shadow-lg"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+            >
+              <h3 className="text-xl font-bold mb-4">Edit Job</h3>
+              <div className="space-y-3">
+                {["title", "type", "salary", "location"].map((field) => (
+                  <div key={field}>
+                    <label className="block text-sm font-medium text-gray-700 capitalize">
+                      {field}
+                    </label>
+                    <input
+                      type="text"
+                      value={editingJob[field]}
+                      onChange={(e) =>
+                        setEditingJob({
+                          ...editingJob,
+                          [field]: e.target.value,
+                        })
+                      }
+                      className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-end gap-3 mt-5">
+                <motion.button
+                  onClick={() => setEditingJob(null)}
+                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Cancel
+                </motion.button>
+                <motion.button
+                  onClick={() => handleEditSave(editingJob)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Save
+                </motion.button>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
