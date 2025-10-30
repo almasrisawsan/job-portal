@@ -20,6 +20,10 @@ const JobTableRow: React.FC<JobTableRowProps> = ({ job, onDelete }) => {
     navigate(`/job-details/${job.id}`); // 👈 يروح على صفحة التفاصيل
   };
 
+  const handleEdit = () => {
+  navigate(`/update-job/${job.id}`);
+};
+
   const createdAtDate = new Date(job.createdAt);
   const deadlineDate = new Date(createdAtDate);
   deadlineDate.setDate(createdAtDate.getDate() + 30);
@@ -38,7 +42,7 @@ const JobTableRow: React.FC<JobTableRowProps> = ({ job, onDelete }) => {
         >
           <EyeIcon className="h-5 w-5 inline" />
         </button>
-        <button className="text-green-600 hover:text-green-800">
+        <button className="text-green-600 hover:text-green-800" onClick={handleEdit}>
           <PencilIcon className="h-5 w-5 inline" />
         </button>
         <button

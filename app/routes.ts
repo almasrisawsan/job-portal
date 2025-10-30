@@ -11,4 +11,6 @@ export default [
 
   // asharaf
   route("/job-details/:id", "routes/Job/job-details.tsx"),
+  route("/job-details/:id", "routes/jobs/job-details.tsx"),
+  route("/update-job/:id", "routes/Job/UpdateJob.jsx"),
 ] satisfies RouteConfig;
