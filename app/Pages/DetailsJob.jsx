@@ -3,12 +3,16 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router";
 import Button from "../components/Button";
 import { GetJobsByid } from "../api/api";
+import { useNavigate, useLocation } from "react-router";
+
 
 const DetailsJob = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -28,6 +32,7 @@ const DetailsJob = () => {
     return (
       <div className="bg-gray-50 min-h-screen py-10 animate-pulse">
         <div className="container mx-auto px-4 md:px-10">
+         
           <div className="h-8 bg-gray-300 rounded w-2/3 mx-auto mb-10"></div>
 
           <div className="bg-white rounded-2xl shadow-md p-6 md:p-10 space-y-8">
@@ -82,6 +87,14 @@ const DetailsJob = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="container mx-auto px-4 md:px-10">
+          <motion.button
+                    onClick={() => navigate(-1)}
+                    className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 transition cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    ← Back
+                  </motion.button>
         <motion.h1
           className="text-2xl md:text-3xl font-bold text-gray-900 text-center"
           initial={{ opacity: 0, y: -30 }}
