@@ -15,17 +15,21 @@ interface JobTableRowProps {
 
 const JobTableRow: React.FC<JobTableRowProps> = ({ job, onDelete }) => {
   const navigate = useNavigate();
-
   const handleView = () => {
     navigate(`/job-details/${job.id}`); // 👈 يروح على صفحة التفاصيل
   };
 
+  const createdAtDate = new Date(job.createdAt);
+  const deadlineDate = new Date(createdAtDate);
+  deadlineDate.setDate(createdAtDate.getDate() + 30);
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50 transition">
       <td className="py-8 px-4 text-[17px]">{job.title}</td>
       <td className="py-8 px-4 text-[17px]">{job.type}</td>
-      <td className="py-8 px-4 text-[17px]">{job.postedDate ?? "2022-07-01"}</td>
-      <td className="py-8 px-4 text-[17px]">{job.deadline ?? "2022-07-01"}</td>
+      <td className="py-8 px-4 text-[17px]">{job.createdAt.split("T")[0]}</td>
+      <td className="py-8 px-4 text-[17px]">
+        {deadlineDate.toLocaleDateString("en-CA")}
+      </td>
       <td className="py-8 px-4 text-[17px] text-center space-x-3">
         <button
           className="text-blue-600 hover:text-blue-800"
