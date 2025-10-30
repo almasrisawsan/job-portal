@@ -1,4 +1,5 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { Link } from "react-router";
 import type { Job } from "src/types/jobs.type";
 
 export default function JobsTable({ jobs }: { jobs: Job[] }) {
@@ -37,7 +38,9 @@ export default function JobsTable({ jobs }: { jobs: Job[] }) {
                 <td className="px-6 py-3 text-center">
                   <div className="flex justify-center gap-2">
                     <button className="text-green-500 hover:text-green-600 text-lg">
-                      <EyeOutlined />
+                      <Link to={`/jobs/job-info/${job.id}`}>
+                        <EyeOutlined />
+                      </Link>
                     </button>
                     <button className="text-blue-400 hover:text-blue-500 text-lg">
                       <EditOutlined />
