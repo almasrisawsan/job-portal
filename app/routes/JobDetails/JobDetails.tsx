@@ -1,19 +1,25 @@
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import JobDetailsIcon from "./components/JobDetailsIcon";
-import useJobDetails from "./useJobDetails";
 import type { Route } from "./+types/JobDetails";
 import FullScreenLoading from "~/components/FullScreenLoading";
-import FullScreenError from "~/components/FullScreenError";
+import { BASE_URL } from "~/constant";
+import { getJobDetailsItems } from "./constant";
 
-const JobDetailsPage = ({ params }: Route.ComponentProps) => {
-  const { isLoading, data, error, jobDetailsItems } = useJobDetails(
-    params.jobId
-  );
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+  const res = await fetch(`${BASE_URL}/jobs/${params.jobId}`);
+  const product = await res.json();
+  return product;
+}
 
-  if (isLoading) return <FullScreenLoading />;
-  if (error) return <FullScreenError label="Oops, Something went wrong" />;
-  if (!data) return <FullScreenError label="Job not found" />;
+// HydrateFallback is rendered while the client loader is running
+export function HydrateFallback() {
+  return <FullScreenLoading />;
+}
+
+const JobDetailsPage = ({ params, loaderData }: Route.ComponentProps) => {
+  const data = loaderData;
+  const jobDetailsItems = getJobDetailsItems(data);
 
   return (
     <div className="pb-8">

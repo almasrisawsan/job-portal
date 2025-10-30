@@ -22,25 +22,34 @@ function PopularCategories() {
     fetchCategories();
   }, []);
 
-  if (loading) {
-    return (
-      <section className="py-12 bg-gray-50 text-center">
-        <p className="text-gray-600">Loading categories...</p>
-      </section>
-    );
-  }
-
   return (
     <section className="py-12 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="text-xl font-semibold text-gray-800 mb-8">
           Popular Categories
         </h2>
-        <CategoryList categories={categories} />
+        {loading ? <CategorySkeleton /> : <CategoryList categories={categories} />}
       </div>
     </section>
   );
 }
+
+function CategorySkeleton() {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      {[...Array(10)].map((_, index) => (
+        <div
+          key={index}
+          className="flex flex-col items-center justify-center bg-white p-6 rounded-lg shadow-sm animate-pulse"
+        >
+          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 mb-3"></div>
+          <div className="h-4 bg-gray-200 rounded w-20"></div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function CategoryList({ categories }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
