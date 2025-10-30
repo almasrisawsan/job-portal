@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      <FeaturedJobs />
       <PopularCategories />
+      <FeaturedJobs />
     </div>
   );
 }
