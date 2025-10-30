@@ -72,6 +72,7 @@ export default function JobsList() {
                 key={index}
                 className="grid grid-cols-5 gap-4 px-6 py-4 items-center"
               >
+                
                 <div className="h-4 bg-gray-300 rounded w-32"></div>
                 <div className="h-4 bg-gray-300 rounded w-20"></div>
                 <div className="h-4 bg-gray-300 rounded w-24"></div>
