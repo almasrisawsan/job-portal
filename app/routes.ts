@@ -10,5 +10,5 @@ export default [
   route("/create-job", "routes/Job/JobForm.tsx"),
 
   // asharaf
-  route("/job-details/:id", "routes/jobs/job-details.tsx"),
+  route("/job-details/:id", "routes/Job/job-details.tsx"),
 ] satisfies RouteConfig;
