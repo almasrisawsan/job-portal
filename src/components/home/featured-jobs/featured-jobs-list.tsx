@@ -1,7 +1,7 @@
 import type { Job } from "src/types/jobs.type";
-import { FileSearchOutlined } from "@ant-design/icons";
 import FeaturedJobCard from "./featured-job-card";
 import FeaturedJobsNotFound from "./featured-jobs-not-found";
+import { useState } from "react";
 
 export default function FeaturedJobsList({ jobs }: { jobs: Job[] }) {
   const hasJobs = jobs && jobs.length > 0;

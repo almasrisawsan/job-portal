@@ -3,11 +3,11 @@ import SearchBar from "../ui/search-bar";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-secondary h-[250px] md:h-[550px] lg:h-[700px]">
+    <section className="relative bg-secondary w-full h-[250px] md:h-[550px] lg:h-[700px]">
       <img
         src={ImageHeroSection}
         alt="hero banner"
-        className="absolute inset-0 w-full h-full object-fill"
+        className="right-0 bottom-0 absolute h-full object-fill"
       />
 
       <div className="z-10 relative px-6 md:px-12 pt-5 md:pt-20 max-w-[300px] md:max-w-lg lg:max-w-2xl text-left">

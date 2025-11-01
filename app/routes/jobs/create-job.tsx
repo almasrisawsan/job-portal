@@ -22,6 +22,10 @@ export default function CreateJobPage() {
 
   const inputs = getJobInputs({ formData, handleChange });
 
+  const handleSubmit = () => {
+    console.log("🚀 ~ handleSubmit ~ formData:", formData);
+  };
+
   return (
     <div className="pb-5">
       <div className="bg-gray-100 py-4 md:py-6 lg:py-8 font-medium text-2xl text-center">
@@ -41,8 +45,8 @@ export default function CreateJobPage() {
             ))}
           </div>
           <div
-            onClick={() => {}}
-            className="flex justify-end items-end p-8 md:min-h-[300px] text-white"
+            onClick={handleSubmit}
+            className="flex justify-end items-end p-8 md:min-h-[300px] text-white cursor-pointer"
           >
             <Button children="Post Job" />
           </div>

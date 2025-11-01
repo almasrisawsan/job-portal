@@ -1,7 +1,9 @@
 import axios, { AxiosError } from "axios";
 
+const BASE_URL = "https://68f8f8e8deff18f212b83fba.mockapi.io";
+
 const AppAPI = axios.create({
-    baseURL: "https://68f8f8e8deff18f212b83fba.mockapi.io",
+    baseURL: BASE_URL,
     timeout: 15000,
     headers: {
         "Content-Type": "application/json",
@@ -9,9 +11,9 @@ const AppAPI = axios.create({
     },
 });
 
-// Return only data and handle basic errors
+
 AppAPI.interceptors.response.use(
-    (response) => response,  // ✅ This extracts the data automatically
+    (response) => response,
     (error: AxiosError) => {
         if (!error.response) {
             return Promise.reject({ status: 500, error: "Network error" });
