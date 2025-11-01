@@ -20,7 +20,6 @@ export default function FeaturedJobs({ jobs, error, loading }) {
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
 
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -149,8 +148,14 @@ export default function FeaturedJobs({ jobs, error, loading }) {
           <div className="flex gap-1">
             {(() => {
               const maxPagesToShow = 5;
-              let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
-              let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+              let startPage = Math.max(
+                1,
+                currentPage - Math.floor(maxPagesToShow / 2)
+              );
+              let endPage = Math.min(
+                totalPages,
+                startPage + maxPagesToShow - 1
+              );
 
               if (endPage - startPage + 1 < maxPagesToShow) {
                 startPage = Math.max(1, endPage - maxPagesToShow + 1);
@@ -169,7 +174,11 @@ export default function FeaturedJobs({ jobs, error, loading }) {
                   </button>
                 );
                 if (startPage > 2) {
-                  pages.push(<span key="dots1" className="px-2 py-2">...</span>);
+                  pages.push(
+                    <span key="dots1" className="px-2 py-2">
+                      ...
+                    </span>
+                  );
                 }
               }
 
@@ -191,7 +200,11 @@ export default function FeaturedJobs({ jobs, error, loading }) {
 
               if (endPage < totalPages) {
                 if (endPage < totalPages - 1) {
-                  pages.push(<span key="dots2" className="px-2 py-2">...</span>);
+                  pages.push(
+                    <span key="dots2" className="px-2 py-2">
+                      ...
+                    </span>
+                  );
                 }
                 pages.push(
                   <button

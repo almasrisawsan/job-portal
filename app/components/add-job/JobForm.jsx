@@ -19,8 +19,7 @@ const JobForm = ({
     location: initialData.location || "",
     salary: initialData.salary || "",
     description: initialData.description || "",
-    postedAt:
-      initialData.postedAt || new Date().toISOString().split("T")[0],
+    postedAt: initialData.postedAt || new Date().toISOString().split("T")[0],
   });
 
   const [errors, setErrors] = useState({});
@@ -32,7 +31,6 @@ const JobForm = ({
       try {
         const response = await GetCatogries();
         setCategories(response.data);
-        // Set default category if not already set and no initial data
         if (!initialData.category && response.data.length > 0) {
           setFormData((prev) => {
             if (!prev.category) {
@@ -48,13 +46,11 @@ const JobForm = ({
       }
     };
     fetchCategories();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -63,15 +59,11 @@ const JobForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Form data being submitted:", formData);
-
-    // Validate form data with Zod
     const result = jobFormSchema.safeParse(formData);
 
     console.log("Validation result:", result);
 
     if (!result.success) {
-      // Convert Zod errors to a format easier to work with
       const newErrors = {};
 
       if (result.error && result.error.issues) {
@@ -83,7 +75,6 @@ const JobForm = ({
 
       setErrors(newErrors);
 
-      // Scroll to first error
       const firstErrorField = Object.keys(newErrors)[0];
       const element = document.getElementsByName(firstErrorField)[0];
       if (element) {
@@ -95,15 +86,12 @@ const JobForm = ({
       return;
     }
 
-    // Clear errors and submit
     setErrors({});
     if (onSubmit) {
-      // Find the categoryId based on the selected category name
       const selectedCategory = categories.find(
         (cat) => cat.name === formData.category
       );
 
-      // Add categoryId to form data
       const submissionData = {
         ...formData,
         categoryId: selectedCategory ? selectedCategory.id : null,
@@ -116,14 +104,15 @@ const JobForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="bg-gray-50 p-6 w-full">
-      {/* Title */}
       <h2 className="mb-6 font-medium text-center text-gray-900 text-lg">
         {title}
       </h2>
       {/* Error Summary */}
       {Object.keys(errors).length > 0 && (
         <div className="bg-red-50 border border-red-500 text-red-700 px-4 py-3 rounded mb-4">
-          <strong className="font-bold">Please fix the following errors:</strong>
+          <strong className="font-bold">
+            Please fix the following errors:
+          </strong>
           <ul className="mt-2 ml-4 list-disc text-sm">
             {Object.entries(errors).map(([field, message]) => (
               <li key={field}>{message}</li>
@@ -133,7 +122,6 @@ const JobForm = ({
       )}
 
       <div className="space-y-6 bg-white shadow-sm p-6 rounded-lg">
-        {/* Company Name + Logo URL */}
         <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
           <div>
             <label className="block mb-2 font-medium text-gray-700 text-sm">
@@ -176,8 +164,6 @@ const JobForm = ({
             )}
           </div>
         </div>
-
-        {/* Job Title */}
         <div>
           <label className="block mb-2 font-medium text-gray-700 text-sm">
             Job Title
