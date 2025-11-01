@@ -5,11 +5,13 @@ import { useFetch } from "src/hooks/useFetch";
 import LoadingSection from "src/components/common/loading-section";
 import ErrorSection from "src/components/common/error-section";
 import NotFoundSection from "src/components/common/not-found-section";
+import { useJobsStore } from "src/store/jobsStore";
 
 export default function FeaturedJobs() {
-  const { data: jobs, loading, error } = useFetch<Job[]>("/jobs");
+  // const { data: jobs, loading, error } = useFetch<Job[]>("/jobs");
 
-  const hasJobs = jobs && jobs.length > 0;
+  const { loading, error, filteredJobs } = useJobsStore();
+  const hasJobs = filteredJobs && filteredJobs.length > 0;
 
   return (
     <section className="flex flex-col justify-center gap-6 bg-white px-4 sm:px-10 py-8">
@@ -21,7 +23,7 @@ export default function FeaturedJobs() {
       ) : !hasJobs ? (
         <NotFoundSection text="jobs" />
       ) : (
-        <FeaturedJobsList jobs={jobs} />
+        <FeaturedJobsList jobs={filteredJobs} />
       )}
     </section>
   );

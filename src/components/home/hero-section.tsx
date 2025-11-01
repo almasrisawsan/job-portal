@@ -1,5 +1,6 @@
 import { ImageHeroSection } from "src/assets";
 import SearchBar from "../ui/search-bar";
+import FeaturedJobsList from "./featured-jobs/featured-jobs-list";
 
 export default function HeroSection() {
   return (
@@ -15,13 +16,15 @@ export default function HeroSection() {
           Find A <span className="text-primary">Job</span> That{" "}
           <span className="text-primary">Matches</span> Your Passion
         </h1>
-
         <p className="mt-4 mb-6 md:mb-8 text-gray-700 sm:text-md text-sm md:text-lg lg:text-xl">
           Hand-picked opportunities to work from home, remotely, freelance,
           full-time, part-time, contract and internships.
         </p>
 
-        <SearchBar />
+        <div className="p-5">
+          <SearchBar />
+          <div className="mt-5">{/* <FeaturedJobsList /> */}</div>
+        </div>
       </div>
     </section>
   );
