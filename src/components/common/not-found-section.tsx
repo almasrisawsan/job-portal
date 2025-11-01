@@ -1,10 +1,11 @@
 import { FileSearchOutlined } from "@ant-design/icons";
+import React from "react";
 
-export default function FeaturedJobsNotFound() {
+export default function NotFoundSection({ text }: { text: string }) {
   return (
     <div className="flex flex-col justify-center items-center bg-gray-50 py-12 border border-gray-200 border-dashed rounded-md text-center">
       <FileSearchOutlined className="mb-3 text-primary text-5xl" />
-      <p className="font-semibold text-gray-700 text-lg">No jobs found</p>
+      <p className="font-semibold text-gray-700 text-lg">No {text} found</p>
       <p className="mt-1 text-gray-500 text-sm">
         Check back later for new opportunities.
       </p>
