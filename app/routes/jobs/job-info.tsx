@@ -1,30 +1,21 @@
 import type { Job } from "src/types/jobs.type";
-import { useLoaderData, type LoaderFunctionArgs, Link } from "react-router";
-import { AppAPI } from "src/services/api";
+import { useParams } from "react-router";
 import HeaderSection from "src/components/jobs/job-info/header-section";
 import ActionButtons from "src/components/jobs/job-info/action-buttons";
 import JobDetailsSection from "src/components/jobs/job-info/job-details-section";
-
-export async function loader({ params }: LoaderFunctionArgs) {
-  const id = params.id;
-  if (!id) throw new Response("Job ID not provided", { status: 400 });
-
-  try {
-    const jobRes = await AppAPI.get(`/jobs/${id}`);
-    const job = jobRes.data as Job;
-
-    return job;
-  } catch (error: any) {
-    throw new Response(error.error || "Job not found", {
-      status: error.status || 404,
-    });
-  }
-}
+import { useFetch } from "src/hooks/useFetch";
+import LoadingSection from "src/components/common/loading-section";
+import NotFoundSection from "src/components/common/not-found-section";
+import ErrorSection from "src/components/common/error-section";
 
 export default function JobInfoPage() {
-  const job = useLoaderData<typeof loader>();
+  const { id } = useParams<{ id: string }>();
 
-  if (!job) return <div className="p-4">Job not found</div>;
+  const { data: job, loading, error } = useFetch<Job>(`/jobs/${id}`);
+
+  if (loading) return <LoadingSection text="Loading job details..." />;
+  if (error) return <ErrorSection error={error} />;
+  if (!job) return <NotFoundSection text="Job not found" />;
 
   return (
     <div className="flex flex-col flex-1 bg-white min-h-screen text-black">
