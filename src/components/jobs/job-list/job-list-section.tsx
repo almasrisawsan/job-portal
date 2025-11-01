@@ -1,17 +1,15 @@
 import type { Job } from "src/types/jobs.type";
 import JobsTable from "./jobs-table";
 import JobsNotFound from "./jobs-not-found";
-import { useFetch } from "src/hooks/useFetch";
 import LoadingSection from "src/components/common/loading-section";
 import ErrorSection from "src/components/common/error-section";
+import { useJobsStore } from "src/store/jobsStore";
 
 export default function JobListSection() {
-  const { data: jobs, loading, error } = useFetch<Job[]>("/jobs");
-
-  const hasJobs = jobs && jobs.length > 0;
+  const { jobs, loading, error } = useJobsStore();
+  const hasJobs = jobs.length > 0;
 
   if (loading) return <LoadingSection text="Loading jobs..." />;
-
   if (error) return <ErrorSection error={error} />;
 
   return (

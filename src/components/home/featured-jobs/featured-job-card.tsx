@@ -13,31 +13,31 @@ export default function FeaturedJobCard({ job }: { job: Job }) {
 
       <div className="flex flex-col flex-1 justify-between w-full">
         <p className="font-normal text-gray-700 text-xs sm:text-sm">
-          {job.company || "Match Company Limited"}
+          {job.companyName || job.company || "Match Company Limited"}
         </p>
 
         <p className="font-semibold text-black text-lg sm:text-xl">
-          {job.title || "Fresher UI/UX Designer"}
+          {job.jobTitle || job.title || "Fresher UI/UX Designer"}
         </p>
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-black">
           <div className="flex items-center gap-1">
             <EnvironmentOutlined className="text-primary text-xs sm:text-sm" />
             <span className="font-normal text-xs sm:text-sm">
-              {job.location || "Dhaka, Bangladesh"}
+              {job.jobLocation || job.location || "Dhaka, Bangladesh"}
             </span>
           </div>
 
           <div className="flex items-center gap-1">
             <CompressOutlined className="text-primary text-xs sm:text-sm" />
             <span className="font-normal text-xs sm:text-sm">
-              {job.type || "Full Time"}
+              {job.jobType || job.type || "Full Time"}
             </span>
           </div>
 
           <div className="flex items-center gap-1">
             <span className="font-normal text-xs sm:text-sm">
-              {job.salary || "Ksh 150,000"}
+              {job.salaryRange || job.salary || "Ksh 150,000"}
             </span>
           </div>
         </div>

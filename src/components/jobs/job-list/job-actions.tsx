@@ -3,13 +3,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "src/content/constants";
 import { AppAPI } from "src/services/api";
+import { useJobsStore } from "src/store/jobsStore";
+import type { Job } from "src/types/jobs.type";
 
 interface JobActionsProps {
-  id: string;
-  onDelete?: (id: string) => void;
+  job: Job;
+  onDelete?: () => void;
 }
 
-export default function JobActions({ id, onDelete }: JobActionsProps) {
+export default function JobActions({ job, onDelete }: JobActionsProps) {
+  const { removeJob } = useJobsStore();
+
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,8 +21,9 @@ export default function JobActions({ id, onDelete }: JobActionsProps) {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await AppAPI.delete(`/jobs/${id}`);
-      if (onDelete) onDelete(id);
+      await AppAPI.delete(`/jobs/${job.id}`);
+      removeJob(job.id);
+      onDelete?.();
       setIsModalOpen(false);
     } catch (error: any) {
       console.error(error);
@@ -28,8 +33,10 @@ export default function JobActions({ id, onDelete }: JobActionsProps) {
     }
   };
 
-  const handleOpen = () => navigate(ROUTES.JOBS.INFO(id));
-  const handleEdit = () => navigate(`${ROUTES.JOBS.INFO(id)}?mode=edit`);
+  const handleOpen = () => navigate(ROUTES.JOBS.INFO(job.id));
+  const handleEdit = () => {
+    navigate(`${ROUTES.JOBS.CREATE}?mode=edit&id=${job.id}`);
+  };
 
   return (
     <>
@@ -57,11 +64,11 @@ export default function JobActions({ id, onDelete }: JobActionsProps) {
       {isModalOpen && (
         <div
           className="z-50 fixed inset-0 flex justify-center items-center bg-black/20"
-          onClick={() => setIsModalOpen(false)} // click outside closes modal
+          onClick={() => setIsModalOpen(false)}
         >
           <div
             className="bg-white shadow-lg p-6 rounded-lg w-96"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+            onClick={(e) => e.stopPropagation()}
           >
             <h3 className="mb-4 font-semibold text-lg">Confirm Delete</h3>
             <p className="mb-6 text-gray-600">
@@ -76,9 +83,7 @@ export default function JobActions({ id, onDelete }: JobActionsProps) {
                 Cancel
               </button>
               <button
-                className={`px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={handleDelete}
                 disabled={loading}
               >

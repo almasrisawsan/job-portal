@@ -1,5 +1,4 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import React from "react";
 
 export default function ErrorSection({ error }: { error?: string | null }) {
   return (

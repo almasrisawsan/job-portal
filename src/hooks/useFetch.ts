@@ -1,32 +1,35 @@
-import { useEffect, useState } from "react";
+// src/hooks/useFetch.ts
+import { useEffect, useState, useCallback } from "react";
 import { AppAPI } from "src/services/api";
 
-export function useFetch<T>(endpoint: string) {
+interface UseFetchOptions {
+    skip?: boolean;
+}
+
+export function useFetch<T>(endpoint: string, options?: UseFetchOptions) {
     const [data, setData] = useState<T | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!options?.skip);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        let isMounted = true;
+    const fetchData = useCallback(async () => {
+        setLoading(true);
+        setError(null);
 
-        AppAPI.get<T>(endpoint)
-            .then((res) => {
-                if (isMounted) {
-                    setData(res.data);
-                    setLoading(false);
-                }
-            })
-            .catch((err) => {
-                if (isMounted) {
-                    setError(err.error || "Something went wrong");
-                    setLoading(false);
-                }
-            });
-
-        return () => {
-            isMounted = false;
-        };
+        try {
+            const res = await AppAPI.get<T>(endpoint);
+            setData(res.data);
+        } catch (err: any) {
+            setError(err?.response?.data?.message || "Something went wrong");
+        } finally {
+            setLoading(false);
+        }
     }, [endpoint]);
 
-    return { data, loading, error };
+    useEffect(() => {
+        if (!options?.skip) {
+            fetchData();
+        }
+    }, [fetchData, options?.skip]);
+
+    return { data, loading, error, refetch: fetchData };
 }

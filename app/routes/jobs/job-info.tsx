@@ -3,18 +3,18 @@ import { useParams } from "react-router";
 import HeaderSection from "src/components/jobs/job-info/header-section";
 import ActionButtons from "src/components/jobs/job-info/action-buttons";
 import JobDetailsSection from "src/components/jobs/job-info/job-details-section";
-import { useFetch } from "src/hooks/useFetch";
-import LoadingSection from "src/components/common/loading-section";
 import NotFoundSection from "src/components/common/not-found-section";
-import ErrorSection from "src/components/common/error-section";
+import { useJobsStore } from "src/store/jobsStore";
 
 export default function JobInfoPage() {
   const { id } = useParams<{ id: string }>();
+  const { getJob } = useJobsStore();
 
-  const { data: job, loading, error } = useFetch<Job>(`/jobs/${id}`);
+  // Get the job from the store
+  if (!id) return <NotFoundSection text="Job id is unknown" />;
 
-  if (loading) return <LoadingSection text="Loading job details..." />;
-  if (error) return <ErrorSection error={error} />;
+  const job = getJob(id);
+
   if (!job) return <NotFoundSection text="Job not found" />;
 
   return (
