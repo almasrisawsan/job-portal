@@ -6,9 +6,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { MotionConfig } from "framer-motion";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/shared/Header";
+import Footer from "./components/shared/Footer";
 
 import "./app.css";
 
@@ -34,9 +35,9 @@ export function Layout({ children }) {
 
 export default function App() {
   return (
-    <div>
+    <MotionConfig reducedMotion="never">
       <Outlet />
-    </div>
+    </MotionConfig>
   );
 }
 

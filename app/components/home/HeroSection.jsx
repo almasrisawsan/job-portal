@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import Button from "./Button";
-import Input from "./Input";
-import SuggestionsList from "./SuggestionsList";
-
-import woman2 from "../welcome/woman2.png";
+import Button from "../shared/Button";
+import Input from "../shared/Input";
+import SuggestionsList from "../SuggestionsList";
+import woman2 from "../../welcome/woman2.png";
 
 export default function HeroSection({ jobs }) {
   const [suggestions, setSuggestions] = useState([]);

@@ -1,26 +1,8 @@
 import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import { z } from "zod";
-import Button from "./Button";
-import { GetCatogries } from "../api/api";
-
-// Zod validation schema
-const jobFormSchema = z.object({
-  company: z.string().min(2, "Company name must be at least 2 characters"),
-  logo: z
-    .string()
-    .refine(
-      (val) => val === "" || /^https?:\/\/.+/.test(val),
-      "Please enter a valid URL"
-    ),
-  title: z.string().min(3, "Job title must be at least 3 characters"),
-  category: z.string().min(1, "Category is required"),
-  type: z.string().min(1, "Job type is required"),
-  location: z.string().min(2, "Location must be at least 2 characters"),
-  salary: z.string().optional(),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  postedAt: z.string(),
-});
+import {jobFormSchema} from '../../libs/schema/validation/form'
+import Button from "../shared/Button";
+import { GetCatogries } from "../../api/api";
 
 const JobForm = ({
   initialData = {},
@@ -138,7 +120,6 @@ const JobForm = ({
       <h2 className="mb-6 font-medium text-center text-gray-900 text-lg">
         {title}
       </h2>
-
       {/* Error Summary */}
       {Object.keys(errors).length > 0 && (
         <div className="bg-red-50 border border-red-500 text-red-700 px-4 py-3 rounded mb-4">

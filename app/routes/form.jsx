@@ -1,4 +1,4 @@
-import CreateJobPage from "../Pages/CreateJobPage";
+import CreateJobPage from "../Pages/CreateJobPage"
 
 export function meta() {
   return [

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import HeroSection from "../components/HeroSection";
-import Categories from "../components/Catogoies";
-import FeaturedJobs from "../components/FeaturedJobs";
+import HeroSection from "../components/home/HeroSection";
+import Categories from "../components/home/Catogoies";
+import FeaturedJobs from "../components/home/FeaturedJobs";
 import { GetJobs } from "../api/api";
 
 export default function HomePage() {

@@ -1,25 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router";
-import { CreateJob } from "../api/api";
-import JobForm from "../components/JobForm";
-import Button from "../components/Button";
+import { useNavigate, useLocation } from "react-router";
+import { CreateJob, UpdateJob } from "../api/api";
+import JobForm from "../components/add-job/JobForm";
+import Button from "../components/shared/Button";
 
 export default function CreateJobPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { job, isEdit } = location.state || {};
+
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState(null);
   const [successJobId, setSuccessJobId] = useState(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    console.log("CreateJobPage mounted - triggering animation");
+    setIsMounted(true);
+  }, []);
 
   const handleSubmit = async (formData) => {
     setCreating(true);
     setError(null);
     try {
-      const response = await CreateJob(formData);
-      setSuccessJobId(response.data.id);
+      if (isEdit && job) {
+        // Update existing job
+        await UpdateJob(job.id, formData);
+        setSuccessJobId(job.id);
+      } else {
+        // Create new job
+        const response = await CreateJob(formData);
+        setSuccessJobId(response.data.id);
+      }
     } catch (err) {
       setError(err.message);
-      console.error("Error creating job:", err);
+      console.error(isEdit ? "Error updating job:" : "Error creating job:", err);
     } finally {
       setCreating(false);
     }
@@ -27,9 +43,9 @@ export default function CreateJobPage() {
   return (
     <motion.div
       className="container mx-auto py-8 min-h-screen"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={false}
+      animate={isMounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <AnimatePresence mode="wait">
         {error && (
@@ -61,7 +77,7 @@ export default function CreateJobPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Job Created Successfully!
+              {isEdit ? "Job Updated Successfully!" : "Job Created Successfully!"}
             </motion.h3>
             <motion.p
               className="mb-4"
@@ -69,7 +85,9 @@ export default function CreateJobPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              Your job posting has been created and is now live.
+              {isEdit
+                ? "Your job posting has been updated successfully."
+                : "Your job posting has been created and is now live."}
             </motion.p>
             <motion.div
               className="flex gap-3"
@@ -88,13 +106,17 @@ export default function CreateJobPage() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   onClick={() => {
-                    setSuccessJobId(null);
-                    setError(null);
+                    if (isEdit) {
+                      navigate(-1);
+                    } else {
+                      setSuccessJobId(null);
+                      setError(null);
+                    }
                   }}
                   variant="outline"
                   className="border-teal-600 text-teal-600 hover:bg-teal-700/70 px-6 py-2 rounded-md"
                 >
-                  Create Another Job
+                  {isEdit ? "Back to Jobs" : "Create Another Job"}
                 </Button>
               </motion.div>
             </motion.div>
@@ -109,9 +131,18 @@ export default function CreateJobPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <JobForm
+            initialData={isEdit && job ? job : {}}
             onSubmit={handleSubmit}
-            submitButtonText={creating ? "Creating..." : "Post Job"}
-            title="Create a Job"
+            submitButtonText={
+              creating
+                ? isEdit
+                  ? "Updating..."
+                  : "Creating..."
+                : isEdit
+                ? "Update Job"
+                : "Post Job"
+            }
+            title={isEdit ? "Edit Job" : "Create a Job"}
           />
         </motion.div>
       )}

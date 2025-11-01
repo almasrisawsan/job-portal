@@ -8,7 +8,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useNavigate } from "react-router";
-import Button from "./Button";
+import Button from "../shared/Button";
 
 export default function FeaturedJobs({ jobs, error, loading }) {
   const navigate = useNavigate();

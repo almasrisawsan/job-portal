@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useParams, useNavigate, useLocation } from "react-router";
-import { DeleteJobsByid, GetJobsByCatogriesId, UpdateJob } from "../api/api";
+import { DeleteJobsByid, GetJobsByCatogriesId } from "../api/api";
 import { AiOutlineEye, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
 export default function JobsList() {
@@ -11,7 +11,6 @@ export default function JobsList() {
   const categoryName = location.state?.categoryName || `Category #${id}`;
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editingJob, setEditingJob] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -50,14 +49,6 @@ export default function JobsList() {
   };
 
   const columns = ["Title", "Type", "Salary", "Location", "Action"];
-
-  const handleEditSave = async (updatedJob) => {
-    await UpdateJob(updatedJob.id, updatedJob);
-    setJobs((prev) =>
-      prev.map((job) => (job.id === updatedJob.id ? updatedJob : job))
-    );
-    setEditingJob(null);
-  };
 
   return (
     <motion.div
@@ -176,7 +167,7 @@ export default function JobsList() {
                       <AiOutlineEdit
                         size={20}
                         className="text-yellow-600 cursor-pointer hover:text-yellow-800"
-                        onClick={() => setEditingJob(job)}
+                        onClick={() => navigate('/jobs/new', { state: { job, isEdit: true } })}
                       />
                       <AiOutlineDelete
                         size={20}
@@ -191,71 +182,6 @@ export default function JobsList() {
           </table>
         </motion.div>
       )}
-      <AnimatePresence mode="wait">
-        {editingJob && (
-          <motion.div
-            className="fixed inset-0 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-              onClick={() => setEditingJob(null)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            ></motion.div>
-
-            <motion.div
-              className="bg-white rounded-lg p-6 w-full max-w-md relative z-10 shadow-lg"
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              transition={{ type: "spring", duration: 0.5 }}
-            >
-              <h3 className="text-xl font-bold mb-4">Edit Job</h3>
-              <div className="space-y-3">
-                {["title", "type", "salary", "location"].map((field) => (
-                  <div key={field}>
-                    <label className="block text-sm font-medium text-gray-700 capitalize">
-                      {field}
-                    </label>
-                    <input
-                      type="text"
-                      value={editingJob[field]}
-                      onChange={(e) =>
-                        setEditingJob({
-                          ...editingJob,
-                          [field]: e.target.value,
-                        })
-                      }
-                      className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-end gap-3 mt-5">
-                <motion.button
-                  onClick={() => setEditingJob(null)}
-                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Cancel
-                </motion.button>
-                <motion.button
-                  onClick={() => handleEditSave(editingJob)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Save
-                </motion.button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }

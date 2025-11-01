@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import icon from "../welcome/icon.png";
+import icon from "../../welcome/icon.png";
 import { useNavigate } from "react-router";
-import { GetCatogries } from "../api/api";
+import { GetCatogries } from "../../api/api";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);

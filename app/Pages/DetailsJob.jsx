@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useParams } from "react-router";
-import Button from "../components/Button";
+import Button from "../components/shared/Button";
 import { GetJobsByid } from "../api/api";
 import { useNavigate, useLocation } from "react-router";
 
