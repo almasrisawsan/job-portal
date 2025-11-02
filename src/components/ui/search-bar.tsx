@@ -55,8 +55,8 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="relative mx-auto w-full max-w-2xl">
-      <div className="flex items-center bg-white shadow-md px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-full">
+    <div className="relative mx-auto w-[300px] md:w-full max-w-2xl">
+      <div className="flex items-center bg-white shadow-md rounded-xl">
         <input
           type="text"
           value={query}
@@ -67,7 +67,7 @@ export default function SearchBar() {
           onFocus={() => setShowOptions(true)}
           onBlur={() => setTimeout(() => setShowOptions(false), 150)}
           className="flex-1 px-2 border-none outline-none text-sm sm:text-base"
-          placeholder="Search job title, company, or location..."
+          placeholder="Search job title or company..."
         />
         <Button
           type="button"

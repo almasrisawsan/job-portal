@@ -1,10 +1,9 @@
 import { ImageHeroSection } from "src/assets";
 import SearchBar from "../ui/search-bar";
-import FeaturedJobsList from "./featured-jobs/featured-jobs-list";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-secondary w-full h-[250px] md:h-[550px] lg:h-[700px]">
+    <section className="relative bg-secondary w-full h-[280px] md:h-[550px] lg:h-[700px]">
       <img
         src={ImageHeroSection}
         alt="hero banner"
@@ -21,10 +20,7 @@ export default function HeroSection() {
           full-time, part-time, contract and internships.
         </p>
 
-        <div className="p-5">
-          <SearchBar />
-          <div className="mt-5">{/* <FeaturedJobsList /> */}</div>
-        </div>
+        <SearchBar />
       </div>
     </section>
   );
